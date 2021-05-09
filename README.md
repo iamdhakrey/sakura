@@ -16,4 +16,4 @@
     > `python manage.py runserver`
 
 * Run Sakura Bot 
-    > `python manage.py run-sakura
+    > `python manage.py run-sakura`
