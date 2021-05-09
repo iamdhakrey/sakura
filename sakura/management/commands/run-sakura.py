@@ -30,4 +30,4 @@ class Command(BaseCommand):
         # else:
         #     print("[Bot] - No TOKEN found!")
 
-        self.stdout.write(self.style.SUCCESS("[Bot] - Bot Stoped...."))
+        self.stdout.write(self.style.SUCCESS("[Bot] - Bot Stopped...."))
