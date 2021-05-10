@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
     'sakuralogin.auth.SakuraAuthenticationBackend'
 ]
 
