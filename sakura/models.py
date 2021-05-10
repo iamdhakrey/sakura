@@ -8,7 +8,7 @@ class ImagesModel(models.Model):
     image3  = models.ImageField(verbose_name="image3",upload_to='welcome_images/',width_field=1920,height_field=872)
 
 class WelcomeData(models.Model):
-    server_name     =  models.BigIntegerField(primary_key=True)
+    server_id       =  models.BigIntegerField(primary_key=True)
     server_name     =  models.CharField(verbose_name="server_name", max_length=100)
     guild_id        =  models.BigIntegerField()
     server_active   =  models.BooleanField(default=True)
@@ -17,7 +17,8 @@ class WelcomeData(models.Model):
     welcome_channel =  models.BigIntegerField(null=True)
     welcome_images  =  models.ForeignKey(ImagesModel,on_delete=models.CASCADE)
     welcome_msg     =  models.CharField(max_length=3000)
-    update_by       =  models.BigAutoField(null=True)
+    update_by       =  models.BigIntegerField(null=True)
     last_update     =  models.DateTimeField(null=True)
 
-
+    def save(self,*args, **kwargs):
+        super(WelcomeData,self).save(*args, **kwargs)
