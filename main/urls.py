@@ -13,10 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from main.views import home
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('auth/',include('sakuralogin.urls')),
     path('admin/', admin.site.urls),
+    path('',home,name='home'),
+    path('background.css', TemplateView.as_view(
+        template_name='background.css',
+        content_type='text/css')
+    ),
 ]
