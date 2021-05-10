@@ -23,7 +23,11 @@ load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+# DISCORD BOT TOKEN 
 TOKEN = os.environ.get("DISCORD_TOKEN")
+
+# DISCORD BOT AUTH REDIRECT URL
+DISCORD_AUTH_URL = os.environ.get("DISCORD_AUTH_URL")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG")
 

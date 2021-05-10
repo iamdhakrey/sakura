@@ -4,9 +4,10 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 import requests
+from django.conf import settings
 
 # Create your views here.
-auth_url_discord = "https://discord.com/api/oauth2/authorize?client_id=840573842958450719&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fauth%2Flogin%2Fredirect&response_type=code&scope=identify"
+auth_url_discord = settings.DISCORD_AUTH_URL
 
 def home(request:HttpResponse) -> JsonResponse:
     return JsonResponse({"msg":'Hello'})
