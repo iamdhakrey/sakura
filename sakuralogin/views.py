@@ -14,7 +14,8 @@ def home(request:HttpResponse) -> JsonResponse:
 @login_required(login_url='/auth/login')
 def get_authenticate_user(request:HttpResponse):
     print(request.user.id)
-    return JsonResponse({"msg":"authenticated"})
+    return render(request,'index.html')
+    # return JsonResponse({"msg":"authenticated"})
 
 def discord_login(request: HttpResponse):
     return redirect(auth_url_discord)
