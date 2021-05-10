@@ -235,3 +235,4 @@ Thumbs.db
 #custom 
 
 .env
+migrations
