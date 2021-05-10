@@ -31,3 +31,10 @@ class DiscordUser(models.Model):
 
     def is_authenticated(self,request):
         return True
+
+    def __str__(self):
+        if len(self.discord_tag) >13:
+            return self.discord_tag[:13]
+        else:
+            return self.discord_tag
+    
