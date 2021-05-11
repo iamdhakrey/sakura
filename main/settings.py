@@ -28,6 +28,10 @@ TOKEN = os.environ.get("DISCORD_TOKEN")
 
 # DISCORD BOT AUTH REDIRECT URL
 DISCORD_AUTH_URL = os.environ.get("DISCORD_AUTH_URL")
+
+# DISCORD BOT INVITE LINK
+DISCORD_INVITE_LINK = os.environ.get("DISCORD_INVITE_LINK")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG")
 
