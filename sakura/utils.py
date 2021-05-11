@@ -20,6 +20,10 @@ def prGreen(args):
 def prRed(args):
     print('{0}{1}{2}{3}'.format(color.BOLD,color.RED,args,color.END))
 
-#* For Warning
+#* For INFO
 def prYellow(args):
     print('{0}{1}{2}{3}'.format(color.BOLD,color.YELLOW,args,color.END))
+
+#* For Warnings
+def prBlue(args):
+    print('{0}{1}{2}{3}'.format(color.BOLD,color.BLUE,args,color.END))
