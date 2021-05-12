@@ -17,6 +17,8 @@ from main.views import home
 from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('auth/',include('sakuralogin.urls')),
@@ -26,4 +28,4 @@ urlpatterns = [
         template_name='background.css',
         content_type='text/css')
     ),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
