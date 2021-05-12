@@ -12,22 +12,30 @@ class color:
    UNDERLINE = '\033[4m'
    END = '\033[0m'
 
-#* For Success
+#* For Logs Success
 def prGreen(args):
     print('{0}{1}{2}{3}'.format(color.BOLD,color.GREEN,args,color.END))
 
-#* For Error
+#* For Logs Error
 def prRed(args):
     print('{0}{1}{2}{3}'.format(color.BOLD,color.RED,args,color.END))
 
-#* For INFO
-def prYellow(args):
-    print('{0}{1}{2}{3}'.format(color.BOLD,color.YELLOW,args,color.END))
-
-#* For Warnings
+#* For Logs Warnings
 def prBlue(args):
     print('{0}{1}{2}{3}'.format(color.BOLD,color.BLUE,args,color.END))
 
-#* For Leave 
+#* For INFO
+def prBold(args):
+    print('{0}{1}{2}'.format(color.BOLD,args,color.END))
+
+#*  Bot Command Not Found Error 
+def prYellow(args):
+    print('{0}{1}{2}{3}'.format(color.BOLD,color.YELLOW,args,color.END))
+
+#* For Guild or Member Leave 
 def prPurple(args):
     print('{0}{1}{2}{3}'.format(color.BOLD,color.PURPLE,args,color.END))
+
+#* For Guild or Member Join
+def prCyan(args):
+    print('{0}{1}{2}{3}'.format(color.BOLD,color.CYAN,args,color.END))
