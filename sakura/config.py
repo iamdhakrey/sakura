@@ -3,8 +3,8 @@ import os
 
 SAKURA_DEBUG = False
 
-MAIN_PREFIXES = ['y']
+MAIN_PREFIXES = ['y_']
 
-COGS_FOLDER = "BotCMD"
+COGS_FOLDER = "sakura.BotCMD"
 
-DEFINED_COGS = ['basic']
+DEFINED_COGS = ['basic','moderation']
