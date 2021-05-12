@@ -27,3 +27,7 @@ def prYellow(args):
 #* For Warnings
 def prBlue(args):
     print('{0}{1}{2}{3}'.format(color.BOLD,color.BLUE,args,color.END))
+
+#* For Leave 
+def prPurple(args):
+    print('{0}{1}{2}{3}'.format(color.BOLD,color.PURPLE,args,color.END))
