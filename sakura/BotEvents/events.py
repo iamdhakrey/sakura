@@ -1,13 +1,22 @@
 import discord
 from discord.ext.commands import Bot
-from sakura.utils import prGreen, prPurple, prRed, prYellow
+from discord.ext import commands
+from sakura.utils import prBlue, prBold, prCyan, prGreen, prPurple, prRed, prYellow
 from sakura.BotMics.bot_db import DbConnection
+
+from sakura.config import COGS_FOLDER,DEFINED_COGS
 
 def event_setup(bot:Bot):
     @bot.event
     async def on_ready():
         prGreen(f"[Bot] - Logged in as {bot.user.name}")
         prGreen("[Bot] - Sakura Ready to Rock..")
+        for cogs in DEFINED_COGS:
+            try:
+                bot.load_extension(COGS_FOLDER+"."+cogs)
+            except commands.errors.ExtensionAlreadyLoaded:
+                pass
+        prBold(f"[Bot] - All Extension Loaded")
 
     @bot.event
     async def on_connect():
@@ -15,11 +24,11 @@ def event_setup(bot:Bot):
 
     @bot.event
     async def on_disconnect():
-        prRed(f"[Bot] - Disconnected! ")
+        prBlue(f"[Bot] - Disconnected! ")
 
     @bot.event
     async def on_guild_join(guild):
-        prYellow(f'[Bot] - Guild join -> {guild.name}')
+        prCyan(f'[Bot] - Guild join -> {guild.name}')
         await DbConnection.fetch_server(guild)
         await DbConnection.fetch_welcome(guild)
 
