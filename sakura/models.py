@@ -19,7 +19,7 @@ class WelcomeData(models.Model):
     welcome_channel =  models.BigIntegerField(null=True)
     welcome_msg     =  models.CharField(max_length=3000)
     update_by       =  models.BigIntegerField(null=True)
-    last_update     =  models.DateTimeField(null=True)
+    last_update     =  models.DateTimeField(null=True,auto_now=True)
     
     image1  = models.ImageField(null=True,verbose_name="image1",upload_to='welcome_images/',width_field="img_width",height_field="img_height")
     image2  = models.ImageField(null=True,verbose_name="image2",upload_to='welcome_images/',width_field="img_width",height_field="img_height")
