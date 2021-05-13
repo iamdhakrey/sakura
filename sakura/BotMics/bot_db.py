@@ -93,7 +93,7 @@ class DbConnection():
             self._db_user = await self.fetch_user(self.d_user)
 
     @classmethod
-    async def fetch_welcome(self,d_guild):
+    async def fetch_welcome(self,d_guild,**kwargs):
         if not await self._has(WelcomeData,server_id=int(d_guild.id)):
             welcome = await self._create(WelcomeData,
             server_id       = int(d_guild.id),
@@ -111,7 +111,20 @@ class DbConnection():
             
             welcome = await self._save(server)
         else:
-            welcome = None
-            print("pass")
+            welcome = await self._get(WelcomeData,server_id = int(d_guild.id))
+            for key,values in kwargs.items():
+                if key == "welcome_enable":
+                    welcome.welcome_enable = values
+                if key == "self_role":
+                    welcome.self_role = values
+                if key == 'welcome_channel':
+                    welcome.welcome_channel = values
+
+                if key == "welcome_msg":
+                    welcome.welcome_msg = values
+
+                if key == 'update_by':
+                    welcome.update_by = values
+            await self._save(welcome)
         return welcome
         
