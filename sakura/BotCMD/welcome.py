@@ -32,6 +32,9 @@ class Welcome(commands.Cog):
         else:
             data = DbConnection.fetch_welcome(ctx.guild)
             channel_id =  data.welcome_channel
+        # convert msg to list
+        msg = msg.replace('\n',"\n\nqwwq").split("\nqwwq")
+
         await DbConnection.fetch_welcome(ctx.guild,
             welcome_msg = msg,
             welcome_channel = channel_id 
