@@ -15,7 +15,13 @@ class Welcome(commands.Cog):
         self.bot    = bot
         self.color  = 0x232323
     
-    @commands.command(aliases=['swm','set_welcome'])
+    @commands.command(
+        name        = 'set_welcome',
+        description = 'Set welcome message',
+        help        = 'y_help set_welcome',
+        usage       = 'y_set_welcome #channel_name welcome_msg',
+        aliases     = ['swm','set_welcome']
+    )
     @has_permissions(administrator=True)
     async def set_welcome_message(self,ctx:Context,set_channel,*,msg=None):
         if msg is None:
@@ -41,7 +47,13 @@ class Welcome(commands.Cog):
             welcome_channel = channel_id 
             )
     
-    @commands.command(aliases=['welcome_check','cw'])
+    @commands.command(
+        name        = 'check_welcome',
+        description = 'before set check welcome msg first how it look like',
+        help        = 'y_help check_welcome',
+        usage       = 'y_check_welcome welcome msg',
+        aliases     =['welcome_check','cw']
+    )
     @has_permissions(administrator=True)
     async def check_welcome(self,ctx:Context,*,msg:str):
         msg = norm_to_emoji(ctx,msg)
@@ -50,7 +62,12 @@ class Welcome(commands.Cog):
         )
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=['show_welcome','gw'])
+    @commands.command(
+        name        = 'get_welcome',
+        description = 'get the exists welcome msg',
+        help        = 'y_help get_welcome',
+        usage       = 'y_get_welcome',
+        aliases=['show_welcome','gw'])
     @has_permissions(administrator=True)
     async def get_welcome(self,ctx:Context):
         welcome = await DbConnection.fetch_welcome(ctx.guild)
