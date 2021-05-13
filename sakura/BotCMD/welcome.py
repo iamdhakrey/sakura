@@ -7,6 +7,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 from discord.ext.commands.bot import Bot
+import ast
 from sakura.BotMics.botutils import norm_to_emoji
 
 class Welcome(commands.Cog):
@@ -46,6 +47,16 @@ class Welcome(commands.Cog):
         msg = norm_to_emoji(ctx,msg)
         embed = discord.Embed(
             description = msg,
+        )
+        await ctx.send(embed=embed)
+
+    @commands.command(aliases=['show_welcome','gw'])
+    @has_permissions(administrator=True)
+    async def get_welcome(self,ctx:Context):
+        welcome = await DbConnection.fetch_welcome(ctx.guild)
+        msg = ast.literal_eval(welcome.welcome_msg)
+        embed = discord.Embed(
+            description = "".join(msg)
         )
         await ctx.send(embed=embed)
 
