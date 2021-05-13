@@ -30,6 +30,9 @@ def prBold(args):
 
 #*  Bot Command Not Found Error 
 def prYellow(args):
+    """
+    Bot Command Not Found Error 
+    """
     print('{0}{1}{2}{3}'.format(color.BOLD,color.YELLOW,args,color.END))
 
 #* For Guild or Member Leave 
