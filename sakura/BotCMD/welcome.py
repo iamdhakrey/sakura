@@ -130,5 +130,53 @@ class Welcome(commands.Cog):
         if isinstance(error,commands.MissingRequiredArgument):
             await ctx.reply("Bro use on/off or enable/disable ")     
 
+    @commands.command(aliases=["tw"])
+    @has_permissions(administrator=True)
+    async def test_welcome(self,ctx):
+        """
+        Send Original Set Msg
+        """
+        member_id = ctx.author.id
+        member_name = ctx.author.name +"#"+ctx.author.discriminator
+        member_tag = "<@"+str(member_id)+">"  
+
+        welcome_data = await DbConnection.fetch_welcome(ctx.guild)
+        
+        if welcome_data.self_role is not None:
+            role = discord.utils.get(ctx.guild.roles,id = int(welcome_data.self_role))
+        else:
+            role = None
+        welcome_channel = discord.utils.get(ctx.guild.channels,id=int(welcome_data.welcome_channel))
+
+        temp_welcome_msg = ast.literal_eval(welcome_data.welcome_msg)
+        welcome_msg = []
+
+        for msg in temp_welcome_msg:
+            wlmsg = msg
+            if "member.mention" in msg:
+                wlmsg = str(msg).replace("{"+"member.mention"+"}",member_tag)
+                # test.append(wlmsg)
+            if "member.name" in msg:
+                wlmsg = str(msg).replace("{"+"member.name"+"}",member_name)
+                # test.append(wlmsg)
+            if "member.count" in msg:
+                wlmsg = str(msg).replace("{"+"member.count"+"}",str(ctx.gumsgld.member_count))
+                # test.append(wlmsg)
+            if "member.server_name" in msg:
+                wlmsg = str(msg).replace("{"+"member.server_name"+"}",str(ctx.guild.name))
+                # test.append(wlmsg)
+            if role is not None:
+                if "member.role" in msg:
+                    wlmsg = str(msg).replace("{"+"member.role"+"}",str(role.mention))
+                # test.append(wlmsg)
+            welcome_msg.append(wlmsg)
+        embed = discord.Embed(
+            description = "".join(welcome_msg)
+        )
+        save_image(self.bot,ctx)
+        file = discord.File(open(str(ctx.guild.id)+"_out_welcome.png", 'rb'))
+        embed.set_image(url="attachment://"+str(ctx.guild.id)+"_out_welcome.png")
+        await ctx.send(embed=embed,file=file)
+
 def setup(bot:Bot):
     bot.add_cog(Welcome(bot))
