@@ -1,4 +1,5 @@
-from typing import no_type_check
+from sakura.config import MEDIA_ROOT
+from sakura.BotMics.image import save_image
 from sakura.BotMics.bot_db import DbConnection
 from discord import channel
 from discord.ext.commands.context import Context
@@ -20,7 +21,7 @@ class Welcome(commands.Cog):
         description = 'Set welcome message',
         help        = 'y_help set_welcome',
         usage       = 'y_set_welcome #channel_name welcome_msg',
-        aliases     = ['swm','set_welcome']
+        aliases     = ['swm']
     )
     @has_permissions(administrator=True)
     async def set_welcome_message(self,ctx:Context,set_channel,*,msg=None):
@@ -43,10 +44,26 @@ class Welcome(commands.Cog):
         msg = msg.replace('\n',"\n\nqwwq").split("\nqwwq")
 
         await DbConnection.fetch_welcome(ctx.guild,
-            welcome_msg = msg,
-            welcome_channel = channel_id 
+            welcome_msg     = msg,
+            welcome_channel = channel_id, 
+            update_by       = ctx.author.id 
             )
-    
+
+        await ctx.send("welcome msg set successfully")
+
+    @set_welcome_message.error
+    async def swm_error(self,ctx,error):
+        # if msg is not given
+        if isinstance(error,commands.MissingRequiredArgument):
+            await ctx.send("Welcome Msg Requierd")
+        # Role  not Found
+        if isinstance(error,commands.RoleNotFound):
+            await ctx.send(error)
+
+        #channel not Found
+        if isinstance(error,commands.ChannelNotFound):
+            await ctx.send(error)
+
     @commands.command(
         name        = 'check_welcome',
         description = 'before set check welcome msg first how it look like',
@@ -73,8 +90,16 @@ class Welcome(commands.Cog):
         welcome = await DbConnection.fetch_welcome(ctx.guild)
         msg = ast.literal_eval(welcome.welcome_msg)
         embed = discord.Embed(
+            title       = "Welcome Message",
             description = "".join(msg)
         )
+        if welcome.welcome_channel is not None:
+            welcome_channel = "<#"+str(welcome.welcome_channel)+'>'
+        else:
+            welcome_channel = None
+        embed.add_field(name="is_enable",value=welcome.welcome_enable,inline=False)
+        embed.add_field(name="welcome_channel",value=welcome_channel,inline=True)
+        embed.add_field(name="self_role",value=welcome.self_role,inline=False)
         await ctx.send(embed=embed)
 
 def setup(bot:Bot):
