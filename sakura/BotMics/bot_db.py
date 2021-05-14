@@ -125,6 +125,22 @@ class DbConnection():
 
                 if key == 'update_by':
                     welcome.update_by = values
+
+                if key == 'image1':
+                    welcome.image1 = values
+
+                if key == 'image2':
+                    welcome.image2 = values
+                
+                if key == 'image3':
+                    welcome.image3 = values
+
+                if key == 'image4':
+                    welcome.image4 = values
+
+                if key == 'image5':
+                    welcome.image5 = values
+
             await self._save(welcome)
         return welcome
         

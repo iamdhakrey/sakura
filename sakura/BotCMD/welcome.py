@@ -10,6 +10,11 @@ from discord.ext.commands import has_permissions
 from discord.ext.commands.bot import Bot
 import ast
 from sakura.BotMics.botutils import norm_to_emoji
+from PIL import Image, UnidentifiedImageError
+import requests
+from io import BytesIO
+from PIL import ImageOps
+
 
 class Welcome(commands.Cog):
     def __init__(self,bot) -> None:
@@ -177,6 +182,59 @@ class Welcome(commands.Cog):
         file = discord.File(open(str(ctx.guild.id)+"_out_welcome.png", 'rb'))
         embed.set_image(url="attachment://"+str(ctx.guild.id)+"_out_welcome.png")
         await ctx.send(embed=embed,file=file)
+
+    @commands.command(aliases=["welcome_image","swi"])
+    @has_permissions(administrator=True)
+    async def set_welcome_image(self,ctx:Context,*,images_link):
+        """
+        Set Welcome Image
+        """
+        _image_list = images_link.split(" ")
+        for i in _image_list:
+            if i == '':
+                _image_list.remove(i)
+
+        if len(_image_list) > 6:
+            await ctx.reply("No More than 5 Images")
+            return
+        i = 0
+        image_name = []
+        for link in _image_list:
+            i = i + 1
+            url = requests.get(link)
+            background = Image.open(BytesIO(url.content))
+            width,height = background.size
+            if width <= 1920 and height <= 972:
+                await ctx.send(link+' is not set valid for background')
+                await ctx.send("minimum 1920*972 resolution required")
+                return
+            else:
+                background = background.resize((1920,972))
+                output = ImageOps.fit(background,background.size,centering=(0.5,0.5))
+                output.save("media/images/"+str(ctx.guild.id)+"/"+str(ctx.guild.id)+"_"+str(i)+".jpg")
+                image_name.append(str(ctx.guild.id)+"_"+str(i)+".jpg")
+                if i == 1:
+                    await DbConnection.fetch_welcome(ctx.guild,image1 ="images/"+str(ctx.guild.id)+"/"+str(ctx.guild.id)+"_"+str(i)+".jpg")
+                elif i == 2:
+                    await DbConnection.fetch_welcome(ctx.guild,image2 ="images/"+str(ctx.guild.id)+"/"+str(ctx.guild.id)+"_"+str(i)+".jpg")
+                elif i == 3:
+                    await DbConnection.fetch_welcome(ctx.guild,image3 ="images/"+str(ctx.guild.id)+"/"+str(ctx.guild.id)+"_"+str(i)+".jpg")
+                elif i == 4:
+                    await DbConnection.fetch_welcome(ctx.guild,image4 ="images/"+str(ctx.guild.id)+"/"+str(ctx.guild.id)+"_"+str(i)+".jpg")
+                elif i == 5:
+                    await DbConnection.fetch_welcome(ctx.guild,image5 ="images/"+str(ctx.guild.id)+"/"+str(ctx.guild.id)+"_"+str(i)+".jpg")
+                else:
+                    pass
+        await ctx.send("backgrounds images set successfully")
+
+    @set_welcome_image.error
+    async def set_welcome_error(self,ctx,error):
+        if isinstance(error,commands.MissingRequiredArgument):
+            await ctx.reply("Image link requie")
+        if isinstance(error,UnidentifiedImageError):
+            await ctx.reply("Bro send the current image link")
+        if isinstance(error,commands.CommandInvokeError):
+            await ctx.reply("Invalid URL")
 
 def setup(bot:Bot):
     bot.add_cog(Welcome(bot))
