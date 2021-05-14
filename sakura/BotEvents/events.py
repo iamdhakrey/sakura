@@ -34,6 +34,7 @@ def event_setup(bot:Bot):
     @bot.event
     async def on_guild_join(guild):
         prCyan(f'[Bot] - Guild join -> {guild.name}')
+        makedirs(str(settings.MEDIA_ROOT)+'/images/'+str(guild.id))
         await DbConnection.fetch_server(guild)
         await DbConnection.fetch_welcome(guild)
 
