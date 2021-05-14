@@ -102,5 +102,33 @@ class Welcome(commands.Cog):
         embed.add_field(name="self_role",value=welcome.self_role,inline=False)
         await ctx.send(embed=embed)
 
+    @commands.command(
+        name        = 'Enable Welcome Message',
+        description = 'Enable OR Disable welcome message',
+        help        = 'y_help welcome_enable',
+        usage       = 'y_welcome_enable True/False',
+        aliases     = ['enable_welcome'])
+    @has_permissions(administrator=True)
+    async def welcome_enable(self,ctx:Context,status):
+        if status is None:
+            await ctx.reply("Bro use on/off or enable/disable ") 
+            return
+
+        if str(status) == "on" or str(status) == "ON" or str(status) == "enable":
+            enable = True
+            # print(status)
+        elif str(status) == "off" or str(status) == "OFF" or str(status) == "disable":
+            enable = False
+        else:
+            await ctx.reply("Bro use on/off or enable/disable ") 
+            return
+        await DbConnection.fetch_welcome(ctx.guild,welcome_enable=enable)
+        await ctx.reply("welcome status is set to  {}".format(status))
+
+    @welcome_enable.error
+    async def welcome_enable_error(self,ctx:Context,error):
+        if isinstance(error,commands.MissingRequiredArgument):
+            await ctx.reply("Bro use on/off or enable/disable ")     
+
 def setup(bot:Bot):
     bot.add_cog(Welcome(bot))
