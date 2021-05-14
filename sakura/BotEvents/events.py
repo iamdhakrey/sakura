@@ -1,9 +1,13 @@
+from os import makedirs, mkdir
 import discord
 from discord.ext.commands import Bot
 from discord.ext.commands import Context
 from discord.ext import commands
+from discord.ext.commands.errors import MissingRequiredArgument
 from sakura.utils import prBlue, prBold, prCyan, prGreen, prPurple, prRed, prYellow
 from sakura.BotMics.bot_db import DbConnection
+
+from django.conf import settings
 
 from sakura.config import COGS_FOLDER,DEFINED_COGS,SAKURA_DEBUG
 
@@ -51,5 +55,14 @@ def event_setup(bot:Bot):
                 if isinstance(error,commands.CommandNotFound):
                     cmd = str(ctx.message.content).replace(ctx.prefix,'').split()[0]
                     prYellow(f"[CMD_Not_Found] - {cmd} execute by {ctx.author.name}#{ctx.author.discriminator}")
+                
+                if isinstance(error, MissingRequiredArgument):
+                    cmd = str(ctx.message.content).replace(ctx.prefix,'').split()[0]
+                    prBlue(f'[CMD required Missing] - {cmd} {str(error).split()[0]} is missing')
+                
+                else:
+                    prBlue(error)
+            else:
+                prBlue(error)
         else:
             prBlue(error)
