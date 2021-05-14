@@ -236,3 +236,4 @@ Thumbs.db
 
 .env
 migrations
+*out_welcome.png
