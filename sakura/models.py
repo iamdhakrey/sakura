@@ -29,6 +29,17 @@ class WelcomeData(models.Model):
 
     img_width = models.PositiveIntegerField(default=1920)
     img_height = models.PositiveIntegerField(default=872)
+
+    def who_updated(self):
+        if self.update_by is not None:
+            return '<@' + str(self.update_by) + '>'
+
+    def mention_welcome_channel(self):
+        if self.welcome_channel is not None:
+            return '<#' + str(self.welcome_channel)+'>'
+        else:
+            return None
+
     def save(self,*args, **kwargs):
         super(WelcomeData,self).save(*args, **kwargs)
 
