@@ -1,3 +1,4 @@
+from discord.ext.commands.context import Context
 from sakura.utils import prBold, prYellow
 import discord
 from discord.ext import commands
