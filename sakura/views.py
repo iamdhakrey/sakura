@@ -10,4 +10,4 @@ def dashboard(request:Request):
     print(request.user.access_token)
     guild_list = Discord_API().get_guild_list(request.user.access_token)
     print(guild_list)
-    return render(request,'channels.html',{'username':request.user,'guild_list':guild_list})
+    return render(request,'dashboard.html',{'username':request.user,'guild_list':guild_list})
