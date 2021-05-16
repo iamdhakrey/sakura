@@ -1,9 +1,12 @@
+from discord.ext.commands.context import Context
 from sakura.models import Server, WelcomeData
 from django.db import connection, connections
 from asgiref.sync import sync_to_async
 
 from django.core.files.images import ImageFile
 from sakuralogin.models import DiscordUser
+import discord
+
 
 class DbConnection():
     def __init__(self,d_user,d_guild) -> None:
@@ -55,6 +58,10 @@ class DbConnection():
     def _create(self,model,**kwargs):
         self.check_connections()
         return model.objects.create(**kwargs)
+
+    @classmethod
+    def get_sync_server(self,**filters):
+        return Server.objects.get(**filters)
 
     @classmethod
     async def fetch_server(self,d_guild):
