@@ -19,11 +19,13 @@ from django.urls import path,include
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from sakura.views import dashboard
 
 urlpatterns = [
     path('auth/',include('sakuralogin.urls')),
     path('admin/', admin.site.urls),
     path('',home,name='home'),
+    path('dashboard/',dashboard,name='dashboard' ),
     path('background.css', TemplateView.as_view(
         template_name='background.css',
         content_type='text/css')
