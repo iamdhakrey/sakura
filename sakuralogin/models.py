@@ -1,3 +1,4 @@
+from os import access
 from django.db import models
 
 from django.contrib.auth.models import User, UserManager
@@ -14,7 +15,8 @@ class DiscordUserManager(UserManager):
             flags = user['flags'],
             locale = user['locale'],
             mfa_enabled = user['mfa_enabled'],
-            discord_tag = discord_tag
+            discord_tag = discord_tag,
+            access_token = user['access_token']
         )
         return new_user
 
@@ -26,11 +28,16 @@ class DiscordUser(models.Model):
     public_flags = models.IntegerField()
     flags = models.IntegerField()
     locale = models.CharField(max_length=100)
+    access_token = models.CharField(verbose_name='access_token', max_length=50,null=True)
     mfa_enabled = models.BooleanField()
     last_login = models.DateTimeField(null=True)
     
     def is_authenticated(self,request):
         return True
+
+    def change_access(self,access_token):
+        self.access_token = access_token
+        self.save()
 
     def __str__(self):
         if len(self.discord_tag) >13:
