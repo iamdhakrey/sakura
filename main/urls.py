@@ -13,20 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from main.views import home
+from main.views import home,new_home
 from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from sakura.views import dashboard,server 
+from sakura.views import dashboard,server, welcome 
 
 urlpatterns = [
     path('auth/',include('sakuralogin.urls')),
     path('admin/', admin.site.urls),
     path('',home,name='home'),
+    path('new',new_home,name='new_home'),
     path('dashboard/',dashboard,name='dashboard' ),
     path('server/<int:pk>',server,name='server'),
+    path('server/<int:pk>/welcome',welcome,name='welcome'),
     path('background.css', TemplateView.as_view(
         template_name='background.css',
         content_type='text/css')
