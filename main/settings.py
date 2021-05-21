@@ -39,7 +39,7 @@ DISCORD_INVITE_LINK = os.environ.get("DISCORD_INVITE_LINK")
 DEBUG = os.environ.get("DJANGO_DEBUG")
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -147,6 +147,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 
+LOGIN_URL='http://127.0.0.1:8000/auth/login'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
