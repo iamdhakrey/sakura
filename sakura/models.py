@@ -46,8 +46,11 @@ class WelcomeData(models.Model):
 class Server(models.Model):
     server_id   = models.BigIntegerField(verbose_name="Guild ID", primary_key=True)
     server_name = models.CharField(verbose_name="Guild Name", max_length=100)
+    avatar      = models.CharField(null=True,max_length=50)
+    admin       = models.CharField(null=True,max_length=100)
+    admin_role  = models.CharField(null=True,max_length=100)
     is_active   = models.BooleanField(default=True)
-    members      = models.ManyToManyField("User")
+    members     = models.ManyToManyField("User")
 
     def __str__(self) -> str:
         """GUILD"""
