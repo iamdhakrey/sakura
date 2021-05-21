@@ -1,7 +1,7 @@
 {% load static %}
 
 body {
-    background-image: url("{% static 'images/background.jpg' %}");
+    background-image: url("{% static 'images/backgrounds.jpg' %}");
     background-position: 50% 0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
