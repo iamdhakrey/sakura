@@ -64,14 +64,20 @@ class DbConnection():
         return Server.objects.get(**filters)
 
     @classmethod
-    async def fetch_server(self,d_guild):
+    async def fetch_server(self,d_guild,**filter):
         if not await self._has(Server,server_id = int(d_guild.id)):
-            server = await self._create(Server,server_id=int(d_guild.id),server_name=str(d_guild.name))
+            server = await self._create(Server,server_id=int(d_guild.id),server_name=str(d_guild.name),avatar=str(d_guild.icon))
         else:
             server = await self._get(Server,server_id= int(d_guild.id))
             if server.server_name == d_guild.name:
                 server.server_name = d_guild.name
                 server.is_active = True
+                for key,values in filter.items():
+                    if key == "admin":
+                        server.admin = values
+                    if key == "admin_role":
+                        server.admin_role = values
+                        
                 await self._save(server)
         return server
 
@@ -81,7 +87,7 @@ class DbConnection():
             server = await self._get(Server,server_id=int(d_guild.id))
             server.is_active = False
             await self._save(server)
-        return server
+            return server
 
     @classmethod
     async def fetch_user(self, dc_user):
