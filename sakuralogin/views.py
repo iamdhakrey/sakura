@@ -32,7 +32,7 @@ def discord_login_redirect(request:HttpResponse):
     api = Discord_API()
     user = api.exchange_code(code)
     discord_user = SakuraAuthenticationBackend.authenticate(request=request,user=user)
-
+    print(user['access_token'],"token")
     change= DiscordUser.objects.get(pk=user['id'])
     print(change)
     change.access_token = user['access_token']
@@ -40,7 +40,7 @@ def discord_login_redirect(request:HttpResponse):
     api.get_guild_list(user['access_token'])
     discord_user = list(discord_user).pop()
     login(request,discord_user,backend='sakuralogin.auth.SakuraAuthenticationBackend')
-    return redirect('/auth/user')
+    return redirect('dashboard')
 
 def discord_logout(request:HttpResponse):
     logout(request)
