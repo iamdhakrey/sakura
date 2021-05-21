@@ -8,3 +8,8 @@ discord_invite = settings.DISCORD_INVITE_LINK
 def home(request):
     avatar_url = None
     return render(request,'base.html',{'user':request.user,'avatar_url':avatar_url,"invite_url":discord_invite})
+
+def new_home(request):
+    print(discord_invite)
+    avatar_url = None
+    return render(request,'new_base.html',{'user':request.user,'avatar_url':avatar_url,"invite_url":discord_invite})
