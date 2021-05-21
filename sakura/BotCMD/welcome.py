@@ -93,7 +93,7 @@ class Welcome(commands.Cog):
     @has_permissions(administrator=True)
     async def get_welcome(self,ctx:Context):
         welcome = await DbConnection.fetch_welcome(ctx.guild)
-        msg = ast.literal_eval(welcome.welcome_msg)
+        msg = norm_to_emoji(ctx,welcome.welcome_msg).split("\n")
         embed = discord.Embed(
             title       = "Welcome Message",
             description = "".join(msg)
@@ -153,7 +153,7 @@ class Welcome(commands.Cog):
             role = None
         welcome_channel = discord.utils.get(ctx.guild.channels,id=int(welcome_data.welcome_channel))
 
-        temp_welcome_msg = ast.literal_eval(welcome_data.welcome_msg)
+        temp_welcome_msg = ast.literal_eval(norm_to_emoji(ctx,welcome_data.welcome_msg).split("\n"))
         welcome_msg = []
 
         for msg in temp_welcome_msg:
