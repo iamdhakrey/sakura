@@ -36,8 +36,7 @@ DISCORD_REDIRECT_URL = os.environ.get("DISCORD_REDIRECT_URL")
 DISCORD_INVITE_LINK = os.environ.get("DISCORD_INVITE_LINK")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG")
-
+# DEBUG =  os.environ.get("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
@@ -62,6 +61,7 @@ AUTHENTICATION_BACKENDS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,7 +71,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'main.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -120,7 +119,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# SECURE_HSTS_SECONDS = 31536000
 
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# CSRF_COOKIE_SECURE = True
+
+# SECURE_HSTS_PRELOAD = True
+
+# SECURE_SSL_REDIRECT = True
+
+# SESSION_COOKIE_SECURE = True
+
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -139,9 +150,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
-# STATIC_ROOT = 'static/'
+STATIC_ROOT = 'assets/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
