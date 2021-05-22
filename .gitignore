@@ -233,7 +233,7 @@ Thumbs.db
 
 
 #custom 
-
+assets
 .env
 migrations
 *out_welcome.png
