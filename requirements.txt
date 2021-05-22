@@ -3,3 +3,4 @@ python-dotenv
 pillow
 django
 requests
+whitenoise
