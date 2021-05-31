@@ -65,7 +65,7 @@ def welcome(request:Request,pk):
             if request.POST.get("welcome_channel",None) is not None:
                 welcome.welcome_channel =request.POST.get('welcome_channel')
             if request.POST.get("welcome_enable",None) is not None:
-                if request.POST.get('welcome_enable') == "Enable":
+                if request.POST.get('welcome_enable') == "on":
                     welcome.welcome_enable = True
                 else:
                     welcome.welcome_enable = False
