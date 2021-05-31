@@ -5,14 +5,15 @@
     --nav-width: 68px;
     --first-color: #938FA68C;
     --top-nav:#4e4e50;
-    --left-nav: #6F2232;
+    --left-nav: #52057B;
     --second-color: #52505ECF;
     --first-color-light: #AFA5D9;
     --white-color: #F7F6FB;
     --black-color: #000;
     --body-font: 'Nunito', sans-serif;
     --normal-font-size: 1rem;
-    --z-fixed: 100
+    --z-fixed: 100;
+    --shadow-color: #52057b;
 }
 
 *,
@@ -22,9 +23,7 @@
 }
 
 body{
-   background-color: #1a1a1d;
-
-
+   background-color: var(--black-color);
 }
 .bg-custom{
    background-color:  #27333099;
@@ -34,7 +33,6 @@ body {
     position: relative;
     color: #00ffbf;
     margin: var(--header-height) 0 0 0;
-    padding: 0 5%;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: .5s
@@ -54,7 +52,7 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: var(--top-nav);
+    background-color: #892cdc;
     z-index: var(--z-fixed);
     transition: .5s
 }
@@ -105,7 +103,9 @@ a {
 
 .dropdown-item:focus, .dropdown-item:hover {
     color: #1e2125;
-    background-color: #383f46;
+    background-color: #aa2ee6;
+    box-shadow: 0px 0px 5px 5px var(--shadow-color);
+    border-radius: 5% 5%;
 }
 
 .back-border{
@@ -128,7 +128,7 @@ a {
 }
 
 .h-100{
-    background-color: #1a1a1d;
+    background-color: var(--black-color);
 }
 .nav {
     height: 100%;
@@ -207,6 +207,9 @@ a {
 
 .back-color{
     background-color: #1a1a1d;
+    box-shadow: 0px 0px 5px 5px var(--shadow-color);
+    padding: 5% 5%;
+    border-radius: 2% 2% 2% 2%;
 }
 
 
@@ -214,7 +217,7 @@ a {
     background-color: #1a1a1d !important;
 }
 .bg-trans{
-background-color: #1b232b80 !important;
+background-color: #52057B78;!important;
 }
 .text-check{
     color: #950740 !important;
@@ -230,7 +233,9 @@ background-color: #1b232b80 !important;
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
-        padding-left: calc(var(--nav-width) + 2rem)
+        /* padding-left: calc(var(--nav-width) + 2rem) */
+        padding: 3rem 10rem;
+
     }
 
     .header {
