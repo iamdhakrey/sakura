@@ -28,7 +28,8 @@
                 <div class="ml-auto p-4 align-self-center  justify-content-center bd-highlight">
                     <select class="form-control" name="welcome_channel">
                         {% if welcome_channel %}
-                        <option class='bg-dark text-light' value="welcome_channel.id">{{welcome_channel.name}}</option>
+                        <option class='bg-dark text-light' value={{welcome_channel.id}}>{{welcome_channel.name}}
+                        </option>
                         {% endif %}
                         <option class='bg-dark text-light' value="">Select Channel</option>
                         {% for channel in text_channel  %}
@@ -41,7 +42,6 @@
                     Looks good!
                 </div>
             </div>
-    </div>
 
     <div class="d-flex  flex-column bd-highlight mt-4 mb-4 border-top border-secondary bg-dark">
         <div class="d-flex bd-highlight flex-row mt-4 mb-1  border-secondary bg-dark">
@@ -98,7 +98,7 @@
             <div class="form-group">
                 <label for="exampleFormControlTextarea1"></label>
                 {% if welcome.welcome_msg %}
-                <textarea class="form-control text-dark" name="welcome_message" placeholder="welcome_message"
+                <textarea class="form-control  text-dark" name="welcome_message" placeholder="welcome_message"
                     rows="7">{{welcome.welcome_msg}}</textarea>
                 {% else %}
                 <textarea class="form-control text-dark" name="welcome_message" placeholder="welcome_message"
@@ -121,13 +121,12 @@
             <div class="form-group">
                 <label for="#"></label>
                 {% if welcome.image1 %}
-                    <textarea class="form-control text-dark" name="welcome_images" placeholder="Images Link" rows="3">
+                <textarea class="form-control text-dark" name="welcome_images" placeholder="Images Link" rows="3">
 {{welcome.image1}}
 {{welcome.image2}}
 {{welcome.image3}}
 {{welcome.image4}}
-{{welcome.image5}}
-                    </textarea>
+{{welcome.image5}}</textarea>
                 {% else %}
                 <textarea class="form-control text-dark" name="welcome_images" placeholder="Images Link"
                     rows="3"></textarea>
