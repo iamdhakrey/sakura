@@ -230,6 +230,20 @@ background-color: #52057B78;!important;
 
 
 
+.form-switch .form-check-input {
+    width: 4em;
+    margin-left: -2.5em;
+    background-position: left center;
+    border-radius: 2em;
+    transition: background-position .15s ease-in-out;
+    height: 2rem;
+    box-shadow: 0px 0px 10px 10px darkslategray;
+}
+.off{
+    box-shadow: 0px 0px 10px 10px #fff;
+}
+
+
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
