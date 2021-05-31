@@ -2,7 +2,7 @@
 {% load static %}
 {% block Dashboard %}
 <main class="container-fluid back-color">
-    <div class="bg-dark p-5 rounded mt-3 ">
+    <div class=" p-5 rounded mt-3 ">
         <h1 class='text-center text-light'> <strong>👋 Welcome</strong></h1>
         <div class="align-center">
         </div>
@@ -12,7 +12,7 @@
 
         <form method="POST" action="{% url 'welcome' guild.server_id %}" class="was-validated">
             {% csrf_token %}
-            <div class="d-flex bd-highlight mb-3 mt-3 border-top border-secondary bg-dark">
+            <div class="d-flex bd-highlight mb-3 mt-3 border-top border-secondary ">
 
                 <div class="p-4 bd-highlight align-self-center justify-content-center">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -28,12 +28,12 @@
                 <div class="ml-auto p-4 align-self-center  justify-content-center bd-highlight">
                     <select class="form-control" name="welcome_channel">
                         {% if welcome_channel %}
-                        <option class='bg-dark text-light' value={{welcome_channel.id}}>{{welcome_channel.name}}
+                        <option class=' text-light' value={{welcome_channel.id}}>{{welcome_channel.name}}
                         </option>
                         {% endif %}
-                        <option class='bg-dark text-light' value="">Select Channel</option>
+                        <option class=' text-light' value="">Select Channel</option>
                         {% for channel in text_channel  %}
-                        <option class='bg-dark text-light' value={{channel.id}}>{{channel.name}}</option>
+                        <option class=' text-light' value={{channel.id}}>{{channel.name}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -43,8 +43,8 @@
                 </div>
             </div>
 
-    <div class="d-flex  flex-column bd-highlight mt-4 mb-4 border-top border-secondary bg-dark">
-        <div class="d-flex bd-highlight flex-row mt-4 mb-1  border-secondary bg-dark">
+    <div class="d-flex  flex-column bd-highlight mt-4 mb-4 border-top border-secondary ">
+        <div class="d-flex bd-highlight flex-row mt-4 mb-1  border-secondary ">
             <div class="p-4 bd-highlight align-self-center justify-content-center">
 
                 <h5>
@@ -135,8 +135,8 @@
         </div>
     </div>
 
-    <div class="d-flex  flex-column bd-highlight mt-4 mb-4 border-top border-secondary bg-dark">
-        <div class="d-flex bd-highlight flex-row mt-4 mb-1  border-secondary bg-dark">
+    <div class="d-flex  flex-column bd-highlight mt-4 mb-4 border-top border-secondary ">
+        <div class="d-flex bd-highlight flex-row mt-4 mb-1  border-secondary ">
             <div class="p-4 bd-highlight align-self-center justify-content-center">
 
                 <h5>
@@ -156,7 +156,7 @@
                     <option value="None">Select Role</option>
                     {% endif %}
                     {% for role in roles  %}
-                    <option class="bg-dark text-white" value={{role.id}}>{{role.name}}</option>
+                    <option class=" text-white" value={{role.id}}>{{role.name}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -166,7 +166,7 @@
     </div>
 
 
-    <div class="d-flex bd-highlight mb-5 border-top border-secondary bg-dark">
+    <div class="d-flex bd-highlight mb-5 border-top border-secondary ">
         <div class="ml-auto p-2 align-self-center bd-highlight">
             <input type='submit' value="Save" class="btn btn-outline-light">
         </div>
