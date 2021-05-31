@@ -2,9 +2,9 @@
 > Sakura: A discord Bot 
 
 ## Setup
-* copy  .env_demo to .env file 
+* copy  settings_sample.ini to settings.ini file 
 
-* edit .env file and change variable 
+* edit settings.ini file and change variable 
 
 * make migration 
     > `python manage.py makemigrations`
