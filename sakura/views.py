@@ -64,11 +64,13 @@ def welcome(request:Request,pk):
             welcome = WelcomeData.objects.get(server_id = int(pk))
             if request.POST.get("welcome_channel",None) is not None:
                 welcome.welcome_channel =request.POST.get('welcome_channel')
-            if request.POST.get("welcome_enable",None) is not None:
+            if request.POST.get("welcome_enable") is not None:
                 if request.POST.get('welcome_enable') == "on":
                     welcome.welcome_enable = True
                 else:
                     welcome.welcome_enable = False
+            else:
+                welcome.welcome_enable = False
                 # welcome.welcome_enable =request.POST.get('welcome_enable')
             if request.POST.get("welcome_message",None) is not None:
                 welcome.welcome_msg = request.POST.get('welcome_message')
