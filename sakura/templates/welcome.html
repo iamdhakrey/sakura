@@ -57,19 +57,15 @@
 
             </div>
             <div class="ml-auto p-4 align-self-end  justify-content-center bd-highlight">
-                <select class="form-control" name="welcome_enable">
+
+                <div class="form-check form-switch">
                     {% if welcome.welcome_enable %}
-                    <option value="Enable">Enable</option>
-                    <option value="Disable">Disable</option>
+                    <input class="form-check-input"  name="welcome_enable" type="checkbox" id="flexSwitchCheckDefault" checked />
                     {% else %}
-                    <option value="None">Select Enable/Disable</option>
-                    <option value="Enable">Enable</option>
-                    <option value="Disable">Disable</option>
+                    <input class="form-check-input off"  name="welcome_enable" type="checkbox" id="flexSwitchCheckDefault" />
                     {% endif %}
-                    <!-- <div class="form-check form-switch">
-                    <input class="p-2  m-2 form-check-input" type="checkbox" name="welcome_enable" checked>
-                </div> -->
-                </select>
+                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                </div>
             </div>
         </div>
         <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
