@@ -23,6 +23,7 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=amount+1)
 
     @commands.command()
+    @commands.is_owner()
     @has_permissions(administrator=True)
     async def add_admin(self,ctx:Context,member:discord.Member):
         lis =  []
@@ -32,15 +33,16 @@ class Moderation(commands.Cog):
             if member.id not in server_admin:
                 server_admin.append(member.id)
                 await DbConnection.fetch_server(ctx.guild,admin=server_admin)
-                ctx.reply("Admin Member list updated on sakura server")
+                await ctx.reply("Admin Member list updated on sakura server")
             else:
-                ctx.reply("Member Already added in list")
+                await ctx.reply("Member Already added in list")
         else:
             lis.append(member.id)
             await DbConnection.fetch_server(ctx.guild,admin=lis)
-            ctx.reply("Admin Member list updated on sakura server")
+            await ctx.reply("Admin Member list updated on sakura server")
 
     @commands.command()
+    @commands.is_owner()
     @has_permissions(administrator=True)
     async def remove_admin(self,ctx:Context,member:discord.Member):
         lis =  []
@@ -55,6 +57,7 @@ class Moderation(commands.Cog):
             await DbConnection.fetch_server(ctx.guild,admin=lis)    
 
     @commands.command()
+    @commands.is_owner()
     @has_permissions(administrator=True)
     async def add_admin_role(self,ctx:Context,role:discord.Role):
         lis =  []
@@ -73,6 +76,7 @@ class Moderation(commands.Cog):
             await ctx.reply("Admin Role List updated on Sakura Server")
 
     @commands.command()
+    @commands.is_owner()
     @has_permissions(administrator=True)
     async def remove_admin_role(self,ctx:Context,role:discord.Role):
         lis =  []
