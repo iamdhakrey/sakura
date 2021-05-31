@@ -39,7 +39,7 @@ class Welcome(commands.Cog):
             else:
                 msg += set_channel
 
-        msg = norm_to_emoji(ctx,msg)
+        msg = norm_to_emoji(ctx.guild,msg)
         if discord.utils.get(self.bot.get_all_channels(),id = int(channel_id)):
             channel_id = channel_id
         else:
@@ -78,7 +78,7 @@ class Welcome(commands.Cog):
     )
     @has_permissions(administrator=True)
     async def check_welcome(self,ctx:Context,*,msg:str):
-        msg = norm_to_emoji(ctx,msg)
+        msg = norm_to_emoji(ctx.guild,msg)
         embed = discord.Embed(
             description = msg,
         )
@@ -93,7 +93,7 @@ class Welcome(commands.Cog):
     @has_permissions(administrator=True)
     async def get_welcome(self,ctx:Context):
         welcome = await DbConnection.fetch_welcome(ctx.guild)
-        msg = norm_to_emoji(ctx,welcome.welcome_msg).split("\n")
+        msg = norm_to_emoji(ctx.guild,welcome.welcome_msg).split("\n")
         embed = discord.Embed(
             title       = "Welcome Message",
             description = "".join(msg)
@@ -153,7 +153,7 @@ class Welcome(commands.Cog):
             role = None
         welcome_channel = discord.utils.get(ctx.guild.channels,id=int(welcome_data.welcome_channel))
 
-        temp_welcome_msg = ast.literal_eval(norm_to_emoji(ctx,welcome_data.welcome_msg).split("\n"))
+        temp_welcome_msg = norm_to_emoji(ctx.guild,welcome_data.welcome_msg).split("\n")
         welcome_msg = []
 
         for msg in temp_welcome_msg:
@@ -165,7 +165,7 @@ class Welcome(commands.Cog):
                 wlmsg = str(msg).replace("{"+"member.name"+"}",member_name)
                 # test.append(wlmsg)
             if "member.count" in msg:
-                wlmsg = str(msg).replace("{"+"member.count"+"}",str(ctx.gumsgld.member_count))
+                wlmsg = str(msg).replace("{"+"member.count"+"}",str(ctx.guild.member_count))
                 # test.append(wlmsg)
             if "member.server_name" in msg:
                 wlmsg = str(msg).replace("{"+"member.server_name"+"}",str(ctx.guild.name))
@@ -178,7 +178,7 @@ class Welcome(commands.Cog):
         embed = discord.Embed(
             description = "".join(welcome_msg)
         )
-        save_image(self.bot,ctx)
+        save_image(self.bot,ctx.guild,ctx.author)
         file = discord.File(open(str(ctx.guild.id)+"_out_welcome.png", 'rb'))
         embed.set_image(url="attachment://"+str(ctx.guild.id)+"_out_welcome.png")
         await ctx.send(embed=embed,file=file)
