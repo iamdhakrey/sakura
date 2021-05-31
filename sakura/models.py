@@ -48,6 +48,7 @@ class Server(models.Model):
     server_name = models.CharField(verbose_name="Guild Name", max_length=100)
     avatar      = models.CharField(null=True,max_length=50)
     admin       = models.CharField(null=True,max_length=100)
+    owner       = models.BigIntegerField(null=True)
     admin_role  = models.CharField(null=True,max_length=100)
     is_active   = models.BooleanField(default=True)
     members     = models.ManyToManyField("User")
