@@ -233,7 +233,9 @@ Thumbs.db
 
 
 #custom 
+settings.ini
 assets
 .env
 migrations
 *out_welcome.png
+.vscode
