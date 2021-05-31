@@ -1,3 +1,4 @@
+from discord import asset
 from discord.ext.commands.context import Context
 from sakura.utils import prBold, prYellow
 import discord
@@ -24,6 +25,32 @@ class Basic(commands.Cog):
         embed.set_author(icon_url=user.avatar_url,name=user)
         embed.set_image(url=user.avatar_url)
         await ctx.send(embed=embed)
+    
+    @commands.command(
+        brief       = "Check Ping",
+        description = "Shows Sakura ping status",
+        aliases     = [],
+        help        = "y_ping",
+        usage       = ""
+    )
+    async def ping(self,ctx:Context):
+        ping = round(self.bot.latency,2)
+        data = "Pong 🟢 {}ms ".format(ping)
+        embed = discord.Embed(title=None, description=data, color=0x000000)
+        await ctx.send(embed=embed)
+
+    @commands.command(
+        brief       = "say somethings",
+        description = "",
+        aliases     = ['says'],
+        help        = "y_say text ",
+        usage       = ""
+    )
+    async def say(self,ctx,text:str,*args):
+        txt = " ".join((text,)+args)
+        await ctx.send(txt)
+
+
 
 def setup(bot:Bot):
     bot.add_cog(Basic(bot))
