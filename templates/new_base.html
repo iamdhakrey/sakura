@@ -50,7 +50,7 @@
             <img class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                 src={% static 'images/Discord-Logo-White.png' %}>
             {% endif %}
-            <ul class="dropdown-menu bg-trans" aria-labelledby="dropdownMenuButton1" >
+            <ul class="dropdown-menu bg-trans" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item text-white" href={% url 'dashboard' %}>My Servers</a></li>
                 <!-- <li><a class="dropdown-item text-white" href="#">Another action</a></li> -->
                 <li>
@@ -129,10 +129,14 @@
 
     {% block Dashboard %}
     <main class="container-fluid back-color">
-        <div class="back-color p-5 rounded mt-3 ">
-            <h1 class='text-center text-light'>Dashboard</h1>
+        <div >
+            <div class="p-1 rounded mt-1 ">
+                <div class="align-center">
+                    &nbsp;<h2 class="text-center text-light"><b>Dashboard</b></h2>
+                </div>
+            </div>
             <div class="align-center">
-                <img class='rounded-circle mx-auto d-block'
+                <img class='rounded-circle mx-auto d-block img-fluid'
                     src="https://cdn.discordapp.com/icons/{{ guild.server_id }}/{{guild.avatar}}.png?size=256">
                 &nbsp;<h2 class="text-center text-light"><b>{{guild.server_name}}</b></h2>
             </div>
@@ -141,7 +145,7 @@
 
         </div>
         <div>
-            <div class="back-color p-1 rounded mt-1 ">
+            <div class="p-1 rounded mt-1 ">
                 <div class="align-center">
                     &nbsp;<h2 class="text-center text-light">Server prefix: <b>y_</b></h2>
                 </div>
@@ -168,18 +172,11 @@
     <script src={% static 'js/dashboard.js' %}></script>
     {% comment %} <script src={% static 'js/custom.js' %}></script> {% endcomment %}
     <script>
-        {
-            %
-            if error %
-        }
-        alert('{{error}}') {
-            %
-            elif success %
-        }
-        alert('{{success}}') {
-            %
-            endif %
-        }
+        {% if error %}
+        alert('{{error}}') 
+        {% elif success %}
+        alert('{{success}}') 
+        {% endif %}
     </script>
 
 </body>
