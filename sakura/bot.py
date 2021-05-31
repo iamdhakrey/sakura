@@ -6,7 +6,7 @@ from discord import ActivityType, Status
 from discord.ext import commands
 from discord import Intents
 
-from sakura.BotEvents.events import event_setup
+from sakura.BotEvents import event_setup
 intents = discord.Intents.all()
 
 
