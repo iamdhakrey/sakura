@@ -10,33 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from dotenv import load_dotenv
+
 import os
 from pathlib import Path
+from configparser import RawConfigParser
 
+config = RawConfigParser()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv()
+config.read(str(BASE_DIR)+'/settings.ini')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY =  config.get('setup','SECRET')
 
 # DISCORD BOT TOKEN 
-TOKEN = os.environ.get("DISCORD_TOKEN")
+TOKEN = config.get('discord',"DISCORD_TOKEN")
 
 # DISCORD BOT AUTH REDIRECT URL
-DISCORD_AUTH_URL = os.environ.get("DISCORD_AUTH_URL")
+DISCORD_AUTH_URL = config.get('discord',"DISCORD_AUTH_URL")
 
-CLIENT_ID = os.environ.get("CLIENT_ID")
-CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
-DISCORD_REDIRECT_URL = os.environ.get("DISCORD_REDIRECT_URL")
+CLIENT_ID = config.get('discord',"CLIENT_ID")
+CLIENT_SECRET = config.get('discord',"CLIENT_SECRET")
+DISCORD_REDIRECT_URL = config.get('discord',"DISCORD_REDIRECT_URL")
 # DISCORD BOT INVITE LINK
-DISCORD_INVITE_LINK = os.environ.get("DISCORD_INVITE_LINK")
+DISCORD_INVITE_LINK =config.get('discord',"DISCORD_INVITE_LINK")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG =  os.environ.get("DJANGO_DEBUG")
+DEBUG = config.get('setup',"DJANGO_DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
