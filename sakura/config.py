@@ -9,4 +9,4 @@ MEDIA_ROOT = settings.MEDIA_ROOT
 
 COGS_FOLDER = "sakura.BotCMD"
 
-DEFINED_COGS = ['basic','moderation','welcome']
+DEFINED_COGS = ['basic','moderation','welcome','anime','self_role']
