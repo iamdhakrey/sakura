@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import WelcomeData,Server,User
+from .models import SelfRole, WelcomeData,Server,User
 
 @admin.register(WelcomeData)
 class WelcomeDataAdmin(admin.ModelAdmin):
@@ -16,3 +16,7 @@ class ServerAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ('member_id','discord_tag')
 
+
+@admin.register(SelfRole)
+class SelfRoleAdmin(admin.ModelAdmin):
+    list_display = ('server','message_id','max_role',"last_update") 
