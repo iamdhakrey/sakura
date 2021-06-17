@@ -1,5 +1,5 @@
 from discord.ext.commands.context import Context
-from sakura.models import Server, WelcomeData
+from sakura.models import SelfRole, Server, WelcomeData
 from django.db import connection, connections
 from asgiref.sync import sync_to_async
 
@@ -158,3 +158,10 @@ class DbConnection():
             await self._save(welcome)
         return welcome
         
+    @classmethod 
+    async def fetch_self_role(self,message_id,**kwargs):
+        if not await self._has(SelfRole, message_id=int(message_id)):
+            self_role = await self._create(SelfRole,message_id=int(message_id), server=kwargs.get("guild_id",None),max_role=kwargs.get("max_role",None),reaction=kwargs.get('reaction',None))
+        else:
+            self_role = await self._get(SelfRole, message_id=int(message_id))
+        return self_role
