@@ -83,3 +83,9 @@ class User(models.Model):
         return self.discord_tag
 
     objects = models.Manager()
+class SelfRole(models.Model):
+    server = models.BigIntegerField(verbose_name="server id")
+    message_id = models.BigIntegerField(verbose_name="message_id",unique=True)
+    reaction = models.CharField(verbose_name="reaction",max_length=1000)
+    max_role = models.IntegerField(verbose_name="max_role")
+    last_update     =  models.DateTimeField(null=True,auto_now=True)
