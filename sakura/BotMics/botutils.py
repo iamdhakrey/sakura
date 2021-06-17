@@ -16,3 +16,13 @@ def norm_to_emoji(guild:discord.Guild,arg:str):
         wel = wel + i 
     
     return wel
+
+def em_and_role_split(msg,splitter):
+    emoji_role_dict = {}
+    emoji_list = []
+    for em_and_role in msg:
+        em_and_role = em_and_role.split(splitter)
+        emoji_list.append(em_and_role[0].strip())
+        emoji_role_dict[em_and_role[0].strip().replace(":","")] = em_and_role[1].strip()
+
+    return emoji_list,emoji_role_dict
