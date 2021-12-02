@@ -9,7 +9,8 @@
     --second-color: #52505ECF;
     --first-color-light: #AFA5D9;
     --white-color: #F7F6FB;
-    --black-color: #000;
+    /* --black-color: #000; */
+    --black-color: #222629;
     --body-font: 'Nunito', sans-serif;
     --normal-font-size: 1rem;
     --z-fixed: 100;
@@ -192,7 +193,7 @@ a {
     content: '';
     position: absolute;
     left: 0;
-    width: 2px;
+    width: 0px;
     height: 32px;
     background-color: var(--white-color)
 }
@@ -217,7 +218,7 @@ a {
     background-color: #1a1a1d !important;
 }
 .bg-trans{
-background-color: #52057B78;!important;
+background-color: #52057B78 !important;
 }
 .text-check{
     color: #950740 !important;
