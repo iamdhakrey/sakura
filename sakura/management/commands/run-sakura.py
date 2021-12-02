@@ -5,7 +5,7 @@ from django.conf import settings
 import os
 import discord
 
-from sakura import bot
+from sakura import sakuraBot as bot
 
 
 def run(TOKEN):
