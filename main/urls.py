@@ -19,7 +19,7 @@ from django.urls import path,include
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from sakura.views import dashboard,server, welcome 
+from sakura.views import dashboard, enable_welcome_msg,server, welcome ,CommandView,WelcomeView
 
 urlpatterns = [
     path('auth/',include('sakuralogin.urls')),
@@ -28,9 +28,18 @@ urlpatterns = [
     path('new',new_home,name='new_home'),
     path('dashboard/',dashboard,name='dashboard' ),
     path('server/<int:pk>',server,name='server'),
-    path('server/<int:pk>/welcome',welcome,name='welcome'),
     path('background.css', TemplateView.as_view(
         template_name='background.css',
         content_type='text/css')
     ),
+    path('command/',CommandView.as_view(template_name="command.html"),name='command'),
+
+    ############### Welcome #####################
+    path('server/<int:pk>/welcome',welcome,name='welcome'),
+    path('server/<int:pk>/welcome/enable',enable_welcome_msg,name='enable'),
+    
+    
+    # test
+    # path('welcome/<int:pk>',WelcomeView.as_view(template_name="welcome.html"),name='welcome'),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
