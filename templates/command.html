@@ -1,0 +1,139 @@
+{% extends 'new_base.html' %}
+
+{% block Dashboard %}
+
+
+<nav class="nav nav-pills flex-column justify-content-center flex-sm-row">
+    <button class="nav-link active" id="Basic-tab" data-bs-toggle="tab" data-bs-target="#Basic" type="button"
+        role="tab" aria-controls="Basic" aria-selected="true">Basic</button>
+    
+    <button class="nav-link " id="Moderation-tab" data-bs-toggle="tab" data-bs-target="#Moderation" type="button"
+        role="tab" aria-controls="Moderation" aria-selected="false">Moderation</button>
+    
+    <button class="nav-link " id="Welcome-tab" data-bs-toggle="tab" data-bs-target="#Welcome" type="button"
+        role="tab" aria-controls="Welcome" aria-selected="false">Welcome</button>
+
+    <button class="nav-link " id="Self_Role-tab" data-bs-toggle="tab" data-bs-target="#Self_Role" type="button"
+        role="tab" aria-controls="Self_Role" aria-selected="false">Self Role</button>
+
+    <button class="nav-link " id="Fun-tab" data-bs-toggle="tab" data-bs-target="#Fun" type="button"
+        role="tab" aria-controls="Fun" aria-selected="false">Fun</button>
+    
+    <button class="nav-link " id="Music-tab" data-bs-toggle="tab" data-bs-target="#Music" type="button"
+        role="tab" aria-controls="Music" aria-selected="false">Music</button>
+    
+    <button class="nav-link " id="Help-tab" data-bs-toggle="tab" data-bs-target="#Help" type="button"
+        role="tab" aria-controls="Help" aria-selected="false">Help</button>
+</nav>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane active" id="Basic" role="tabpanel" aria-labelledby="Basic-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Basic</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>
+                                            Command
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th>
+                                            Example
+                                        </th>
+                                        <th>
+                                            Aliases
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        {% for command in helpcmds %}
+                                        {% if command.category == "Basic" %}
+                                        <tr>
+                                            <td>
+                                                <strong>y_{{command.cmd}}</strong>
+                                            </td>
+                                            <td>
+                                                {{command.description}}
+                                            </td>
+                                            <td>
+                                                {{command.usage}}
+                                            </td>
+                                            <td>
+                                                {{command.alias}}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for category in categories %}
+    <div class="tab-pane" id="{{category}}" role="tabpanel" aria-labelledby="{{category}}-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">{{category}}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>
+                                            Command
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th>
+                                            Example
+                                        </th>
+                                        <th>
+                                            Aliases
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        {% for command in helpcmds %}
+                                        {% if command.category == category %}
+                                        <tr>
+                                            <td>
+                                                <strong>y_{{command.cmd}}</strong>
+                                            </td>
+                                            <td>
+                                                {{command.description}}
+                                            </td>
+                                            <td>
+                                                {{command.usage}}
+                                            </td>
+                                            <td>
+                                                {{command.alias}}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock Dashboard %}
