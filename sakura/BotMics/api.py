@@ -14,6 +14,14 @@ class Discord_API:
             self.client_secret = client_secret
             self.redirect_url = redirect_url
 
+    # check token in valid or expired
+    def check_token(self,token):
+        url = "https://discord.com/api/v8/users/@me"
+        response = requests.get(url,headers={
+            'Authorization':"Bearer %s"% token
+        })
+        return response.status_code
+
     def exchange_code(self,code:str):
         data = {
             "client_id":self.client_id,
@@ -49,15 +57,12 @@ class Discord_API:
             'Authorization':"Bearer %s"% access_token
         })
         as_a_guild = []
-        # print(response.json())
         for details in response.json():
-            # print(details,"deatails")
-            try:
-                if details['owner'] == True:
-                    if DbConnection.get_sync_server(server_id=details['id']):
-                        as_a_guild.append(details)
-            except TypeError:
-                pass
+            if details['owner'] == True:
+                if DbConnection.get_sync_server(server_id=details['id']):
+                    as_a_guild.append(details)
+            # except TypeError:
+            #     pass
         return as_a_guild
 
     def get_guild_channel(self,access_token,id):
