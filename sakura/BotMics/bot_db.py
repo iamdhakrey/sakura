@@ -1,5 +1,5 @@
 from discord.ext.commands.context import Context
-from sakura.models import SelfRole, Server, WelcomeData
+from sakura.models import HelpCmd, SelfRole, Server, WelcomeData
 from django.db import connection, connections
 from asgiref.sync import sync_to_async
 
@@ -165,3 +165,24 @@ class DbConnection():
         else:
             self_role = await self._get(SelfRole, message_id=int(message_id))
         return self_role
+
+    @classmethod
+    async def fetch_help(self,cmd,**kwargs):
+        if not await self._has(HelpCmd,cmd=cmd.name):
+            help = await self._create(HelpCmd,
+                                cmd = cmd.name,
+                                description = cmd.description,
+                                usage = cmd.usage,
+                                category = cmd.cog_name,
+                                brief = cmd.brief,
+                                alias = cmd.aliases,
+                            )
+        else:
+            help = await self._get(HelpCmd,cmd=cmd.name)
+            # help.cmd = cmd.name
+            help.description = cmd.description
+            help.usage = cmd.usage
+            help.category = cmd.cog_name
+            help.brief = cmd.brief
+            help.alias = cmd.aliases
+            await self._save(help)
