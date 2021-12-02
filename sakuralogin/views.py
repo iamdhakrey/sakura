@@ -37,7 +37,6 @@ def discord_login_redirect(request:HttpResponse):
     print(change)
     change.access_token = user['access_token']
     change.save()
-    api.get_guild_list(user['access_token'])
     discord_user = list(discord_user).pop()
     login(request,discord_user,backend='sakuralogin.auth.SakuraAuthenticationBackend')
     return redirect('dashboard')
