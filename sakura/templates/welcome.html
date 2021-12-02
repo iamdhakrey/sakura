@@ -215,5 +215,60 @@
             $('#' + tagid).addClass('active').removeClass('hide');
         });
     });
+    // get cookie
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    //  check flexSwitchCheckDefault if checked then alert message else alert message
+    $(document).ready(function () {
+        
+        $('#flexSwitchCheckDefault').change(function () {
+            if ($(this).is(":checked")) {
+                //alert('checked');
+                // send post data to welcome/enable url
+                $.ajax({
+                    headers: { "X-CSRFToken": getCookie("csrftoken") },
+                    type: "POST",
+                    url: '/server/{{guild.server_id}}/welcome/enable',
+                    data: {
+                        'enable': '1'
+                    },
+                    success: function (data) {
+                        //alert('welcome messages are ON');
+                        console.log(data);
+                    }
+                });
+            } else {
+                //alert('not checked');
+                // send post data to welcome/enable url
+                $.ajax({
+                    headers: { "X-CSRFToken": getCookie("csrftoken") },
+                    type: "POST",
+                    url: '/server/{{guild.server_id}}/welcome/enable',
+                    data: {
+                        'enable': 0
+                    },
+                    success: function (data) {
+                        //alert('welcome messages are OFF');
+                        // TODO: side bar message
+                        console.log(data);
+                    }
+                });
+            }
+        });
+    });  
 </script>
 {% endblock script %}
