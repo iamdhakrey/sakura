@@ -131,13 +131,15 @@
     <!--Container Main start-->
 
     {% block Dashboard %}
-    <main class="container-fluid back-color">
+    <main class="container-fluid">
         <div >
+            <!---Dashboard start-->
             <div class="p-1 rounded mt-1 ">
                 <div class="align-center">
                     &nbsp;<h2 class="text-center text-light"><b>Dashboard</b></h2>
                 </div>
             </div>
+
             <div class="align-center">
                 <img class='rounded-circle mx-auto d-block img-fluid'
                     src="https://cdn.discordapp.com/icons/{{ guild.server_id }}/{{guild.avatar}}.png?size=256">
@@ -161,9 +163,9 @@
 
     {% block footer %}
     <div class="container">
-        <footer class="bg-transparent fixed-bottom  text-center text-lg-start">
+        <footer class="bg-transparent fixed-bottom text-center text-lg-start">
             <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <div class="text-center p-3" style="background-color: var(--black-color);">
                 Made With ❤️ by
                 <a href='https://iamdhakrey.in' style="text-decoration: none;"> Dhakrey</a>
             </div>
@@ -173,6 +175,8 @@
 
     {% endblock footer %}
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script> {% endcomment %}
+
     <script
 			  src="https://code.jquery.com/jquery-3.6.0.js"
 			  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
