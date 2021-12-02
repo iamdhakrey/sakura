@@ -48,12 +48,12 @@
                 </h3>
                 <nav class="nav nav-masthead justify-content-center float-md-end">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="#">Commands</a>
+                    <a class="nav-link" href={% url 'command' %}>Commands</a>
                     {% if user.is_authenticated is not False %}
                     <a class="nav-link" href="#">{{ user }}</a>
                     <a class="nav-link" href={% url 'logout' %}>Logout</a>
                     {% else %}
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href={% url 'auth' %}>Login</a>
                     {% endif %}
                 </nav>
             </div>
@@ -63,7 +63,7 @@
 
         <main class="px-3">
             <h1>Yae Sakura</h1>
-            <p class="lead">A Discord Bot Created by Lunatian#6689</p>
+            <p class="lead"> <strong> A Discord Server Management Bot Created by</strong> <bold>Lunatian#6689</body></p>
             
             <p class="lead">
                 <a href={{invite_url}} class="btn btn-lg btn-secondary fw-bold border-grey bg-dark text-white"><svg
@@ -100,10 +100,23 @@
                 {% endif %}
 
             </p>
+            {% comment %} <iframe src="https://discord.com/widget?id=738037561712443493&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe> {% endcomment %}
         </main>
     {% endblock content %}
 
-        <footer class="mt-auto text-white-50"></footer>
+        <footer class="mt-auto text-white-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p> &copy; - Yae Sakura</p>
+                            <a href="#">
+                                </svg>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
     </div>
 </body>
