@@ -239,3 +239,5 @@ assets
 migrations
 *out_welcome.png
 .vscode
+audio
+*.mp3
