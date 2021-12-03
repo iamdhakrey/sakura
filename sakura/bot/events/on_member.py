@@ -63,4 +63,4 @@ def event_setup(bot:Bot):
 
     @bot.event 
     async def on_member_remove(guild):
-        prPurple(f'[Bot] - Guild Remove -> {guild.name}')
+        prPurple(f'[Bot] - Member Remove -> {guild.name}')

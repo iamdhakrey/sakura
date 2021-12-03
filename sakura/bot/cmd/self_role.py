@@ -12,11 +12,20 @@ from discord.ext.commands.context import Context
 
 from discord.ext.commands import bot
 
-class BotSelf(commands.Cog):
+class Self_Role(commands.Cog):
+    """
+    Self-assignable roles
+    """
     def __init__(self,bot):
         self.bot = bot
 
-    @commands.command(aliases=['ssm'])
+    @commands.command(
+        brief="Set self Assign Role msg",
+        description="Set self Assign Role msg",
+        aliases=['ssm'],
+        usage="y_set_self_role_msg <msg>",
+        help="Set self Assign Role msg",
+    )
     async def set_self_message(self,ctx:Context,unique,channel : discord.TextChannel = None ,*,msg):
         """
         Age
@@ -72,4 +81,4 @@ class BotSelf(commands.Cog):
         await ctx.send("Self Role set Successfully")
 
 def setup(bot):
-    bot.add_cog(BotSelf(bot))
+    bot.add_cog(Self_Role(bot))

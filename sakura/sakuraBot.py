@@ -1,14 +1,15 @@
 import discord
 from asgiref.sync import sync_to_async
 from discord import guild
-from discord.commands.commands import slash_command
-from sakura.config import MAIN_PREFIXES
+# from discord.commands.commands import slash_command
+from sakura.config import COGS_FOLDER, DEFINED_COGS, MAIN_PREFIXES
 from discord import Activity
 from discord import ActivityType, Status
 from discord.ext import commands
 from discord import Intents
 
 from sakura.bot.events import event_setup
+from sakura.utils import prGreen, prRed
 intents = discord.Intents.all()
 
 
@@ -31,14 +32,14 @@ bot = SakuraBot(
     activity = Activity(type=ActivityType.listening,name='y help')
 )
 
-# from sakura.BotCMD.slash import setup
-# from sakura.bot.slash import setup
-# setup(bot)
-
-from sakura.bot.cmd import cmd_setup
-cmd_setup(bot)
 event_setup(bot)
 
+
+for cogs in DEFINED_COGS:
+    try:
+        bot.load_extension(COGS_FOLDER +"."+ cogs)
+    except discord.errors.ExtensionAlreadyLoaded:
+        prRed(f"{cogs} Extension already loaded")
 # @bot.command()
 # async def hi(ctx):
 #     await ctx.send('hi')

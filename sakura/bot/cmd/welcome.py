@@ -17,16 +17,20 @@ from PIL import ImageOps
 
 
 class Welcome(commands.Cog):
+    """
+    Welcome message
+    """
     def __init__(self,bot) -> None:
         self.bot    = bot
         self.color  = 0x232323
     
     @commands.command(
         name        = 'set_welcome',
+        brief       = 'Set welcome message',
         description = 'Set welcome message',
         help        = 'y_help set_welcome',
         usage       = 'y_set_welcome #channel_name welcome_msg',
-        aliases     = ['swm']
+        aliases     = ['swm'],
     )
     @has_permissions(administrator=True)
     async def set_welcome_message(self,ctx:Context,set_channel,*,msg=None):
@@ -71,6 +75,7 @@ class Welcome(commands.Cog):
 
     @commands.command(
         name        = 'check_welcome',
+        brief       = 'Check welcome message',
         description = 'before set check welcome msg first how it look like',
         help        = 'y_help check_welcome',
         usage       = 'y_check_welcome welcome msg',
@@ -86,6 +91,7 @@ class Welcome(commands.Cog):
 
     @commands.command(
         name        = 'get_welcome',
+        brief       = 'Get welcome message',
         description = 'get the exists welcome msg',
         help        = 'y_help get_welcome',
         usage       = 'y_get_welcome',
@@ -109,6 +115,7 @@ class Welcome(commands.Cog):
 
     @commands.command(
         name        = 'Enable Welcome Message',
+        brief       = 'Enable welcome message',
         description = 'Enable OR Disable welcome message',
         help        = 'y_help welcome_enable',
         usage       = 'y_welcome_enable True/False',
@@ -135,7 +142,13 @@ class Welcome(commands.Cog):
         if isinstance(error,commands.MissingRequiredArgument):
             await ctx.reply("Bro use on/off or enable/disable ")     
 
-    @commands.command(aliases=["tw"])
+    @commands.command(
+        name='test_welcome',
+        brief = 'test welcome message',
+        description = 'test welcome message',
+        aliases=["tw"],
+        usage = 'y_test_welcome'
+        )
     @has_permissions(administrator=True)
     async def test_welcome(self,ctx):
         """
@@ -183,7 +196,12 @@ class Welcome(commands.Cog):
         embed.set_image(url="attachment://"+str(ctx.guild.id)+"_out_welcome.png")
         await ctx.send(embed=embed,file=file)
 
-    @commands.command(aliases=["welcome_image","swi"])
+    @commands.command(
+        name = 'set_welcome_image',
+        brief = 'Set Welcome images',
+        description = 'Set Welcome images',
+        usage = 'y_set_welcome_image',
+        aliases=["welcome_image","swi"])
     @has_permissions(administrator=True)
     async def set_welcome_image(self,ctx:Context,*,images_link):
         """

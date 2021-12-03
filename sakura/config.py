@@ -7,6 +7,6 @@ MAIN_PREFIXES = ['y_']
 
 MEDIA_ROOT = settings.MEDIA_ROOT
 
-COGS_FOLDER = "sakura.BotCMD"
+COGS_FOLDER = "sakura.bot.cmd"
 
-DEFINED_COGS = ['basic','moderation','welcome','anime','self_role']
+DEFINED_COGS = ['basic','moderation','welcome','fun','self_role','music','help']
