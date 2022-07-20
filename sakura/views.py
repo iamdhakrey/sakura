@@ -1,20 +1,18 @@
-from sakura.decorator import role_required
-from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
-from requests import api
-from sakura.models import HelpCmd, Server, WelcomeData
-from django.contrib.auth.decorators import login_required, permission_required
-from sakura.BotMics.api import Discord_API
-from django.http import request as Request
-from django.shortcuts import redirect, render
 from ast import literal_eval
-import requests
 from io import BytesIO
+
+import requests
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.http import request as Request
+from django.http.response import HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect, render
+from django.views.generic import View
 from PIL import Image, ImageOps
 
-
-from django.views.generic import TemplateView,View
-
-from django.conf import settings
+from sakura.BotMics.api import Discord_API
+from sakura.decorator import role_required
+from sakura.models import HelpCmd, Server, WelcomeData
 
 discord_invite = settings.DISCORD_INVITE_LINK
 # Create your views here.
@@ -23,7 +21,6 @@ discord_invite = settings.DISCORD_INVITE_LINK
 @login_required
 def dashboard(request: Request):
     print("redirect to dashboard")
-    content = {}
     # for servers in Server.objects.all():
     #     if servers.admin is not None:
     #         if request.user.id in literal_eval(servers.admin):
@@ -42,27 +39,31 @@ def dashboard(request: Request):
     for servers in Server.objects.all():
         if servers.admin is not None:
             if request.user.id in literal_eval(servers.admin):
-                temp_server = dict(
-                    id=str(servers.server_id),
-                    name=servers.server_name,
-                    icon=servers.avatar,
-                    exists=servers.is_active
-                )
+                dict(id=str(servers.server_id),
+                     name=servers.server_name,
+                     icon=servers.avatar,
+                     exists=servers.is_active)
         for guild in guild_list:
-            if str(servers.server_id) == guild['id'] and servers.avatar !=guild['icon']:
+            if str(servers.server_id
+                   ) == guild['id'] and servers.avatar != guild['icon']:
                 servers.server_name = guild['name']
                 servers.avatar = guild['icon']
                 # save data in datavase
                 servers.save()
                 # guild_list.append(temp_server)
-    return render(request, 'new_dashboard.html', {'username': request.user, 'guild_list': guild_list, 'invite_url': discord_invite})
+    return render(
+        request, 'new_dashboard.html', {
+            'username': request.user,
+            'guild_list': guild_list,
+            'invite_url': discord_invite
+        })
 
 
 @login_required(redirect_field_name="login")
 @role_required(redirect_url='dashboard')
 def server(request, pk):
     if request.user.is_authenticated:
-        guild = Server.objects.get(server_id=pk,)
+        guild = Server.objects.get(server_id=pk, )
         return render(request, 'new_base.html', {'guild': guild})
 
 
@@ -74,7 +75,7 @@ def welcome(request: Request, pk):
         error = None
         if request.method == "POST":
             # print(request.POST)
-            post_context = {}
+            # post_context = {}
             welcome = WelcomeData.objects.get(server_id=int(pk))
             if request.POST.get("welcome_channel", None) is not None:
                 welcome.welcome_channel = request.POST.get('welcome_channel')
@@ -110,15 +111,17 @@ def welcome(request: Request, pk):
                     background = Image.open(BytesIO(url.content))
                     width, height = background.size
                     if width <= 1920 and height <= 972:
-                        error = link+' is not set valid for background \nminimum 1920*972 resolution required'
+                        error = link + ' is not set valid for background ' \
+                                'minimum 1920*972 resolution required'
                         success = False
                     else:
                         background = background.resize((1920, 972))
-                        output = ImageOps.fit(
-                            background, background.size, centering=(0.5, 0.5))
-                        output.save("media/images/"+str(pk) +
-                                    "/"+str(pk)+"_"+str(i)+".jpg")
-                        image_name.append(str(pk)+"_"+str(i)+".jpg")
+                        output = ImageOps.fit(background,
+                                              background.size,
+                                              centering=(0.5, 0.5))
+                        output.save("media/images/" + str(pk) + "/" + str(pk) +
+                                    "_" + str(i) + ".jpg")
+                        image_name.append(str(pk) + "_" + str(i) + ".jpg")
                         if i == 1:
                             welcome.image1 = "images/" + \
                                 str(pk)+"/"+str(pk)+"_"+str(i)+".jpg"
@@ -153,11 +156,8 @@ def welcome(request: Request, pk):
         sata = data.get_guild_channel(settings.TOKEN, id=pk)
         roles = data.get_guild_roles(settings.TOKEN, id=pk)
         welcome_data = WelcomeData.objects.get(server_id=pk)
-        guild = Server.objects.get(server_id=pk,)
-        context = dict(
-            welcome=welcome_data,
-            guild=guild
-        )
+        guild = Server.objects.get(server_id=pk, )
+        context = dict(welcome=welcome_data, guild=guild)
         welcome_channel = {}
 
         for i in sata:
@@ -178,39 +178,40 @@ def welcome(request: Request, pk):
                     welcome_channel['role_name'] = role['name']
         except TypeError:
             pass
-        context = dict(
-            welcome=welcome_data,
-            guild=guild,
-            text_channel=text_channel,
-            roles=roles,
-            welcome_channel=welcome_channel,
-            error=error,
-            success=success
-        )
+        context = dict(welcome=welcome_data,
+                       guild=guild,
+                       text_channel=text_channel,
+                       roles=roles,
+                       welcome_channel=welcome_channel,
+                       error=error,
+                       success=success)
         return render(request, 'welcome.html', context)
-    
+
+
 class CommandView(View):
     template_name = 'command.html'
-    
+
     def get(self, request):
         # if request.user.is_authenticated:
         help_cmds = HelpCmd.objects.all()
         # get unique categories in help_cmds
-        categories = set(
-            [help_cmd.category for help_cmd in help_cmds])
+        categories = set([help_cmd.category for help_cmd in help_cmds])
         # guild = Server.objects.get(server_id=pk,
-        
-        return render(request, 'command.html',{'helpcmds':help_cmds,'categories':categories})
+
+        return render(request, 'command.html', {
+            'helpcmds': help_cmds,
+            'categories': categories
+        })
         # else:
-            # return redirect('auth')
-            
-            
+        # return redirect('auth')
+
+
 @login_required()
 @role_required(redirect_url='dashboard')
 def enable_welcome_msg(request, pk):
     if request.method == "POST":
         # get data form request
-        post_context = {}
+        # post_context = {}
         welcome = WelcomeData.objects.get(server_id=int(pk))
         if request.POST.get("enable") is not None:
             if request.POST.get('enable') == "1":
@@ -222,19 +223,19 @@ def enable_welcome_msg(request, pk):
         return JsonResponse({'success': True})
     else:
         # redirect to previous page
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class WelcomeView(View):
     template_name = 'welcome.html'
-    
-    def get(self,request:Request,pk):
-        # get welcome data 
-        
+
+    def get(self, request: Request, pk):
+        # get welcome data
+
         welcome_data = WelcomeData.objects.get(server_id=int(pk))
         print(welcome_data)
         # get guild
-        # guild = Server.objects.get(server_id=pk,admin__contains=str(request.user.id))
+        # guild = Server.objects.get(server_id=pk)
         # get channels
         text_channel = []
         context = {}
@@ -247,7 +248,7 @@ class WelcomeView(View):
         sata = data.get_guild_channel(settings.TOKEN, id=pk)
         roles = data.get_guild_roles(settings.TOKEN, id=pk)
         welcome_channel = {}
-        
+
         for i in sata:
             # print((type(i['type'])))
             if i['type'] == 0:
@@ -273,6 +274,5 @@ class WelcomeView(View):
             roles=roles,
             welcome_channel=welcome_channel,
             error=None,
-            success=None
-        )
+            success=None)
         return render(request, 'welcome.html', context)

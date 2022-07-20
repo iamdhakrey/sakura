@@ -13,7 +13,7 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
 
-path='/home/user/mygit/Sakura_web/main'
+# path='/home/user/mygit/Sakura_web/main'
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
 application = get_wsgi_application()

@@ -1,6 +1,7 @@
-discord
+# py-cord==2.0.0b7
 python-dotenv
 pillow
 django
 requests
 whitenoise
+youtube-dl

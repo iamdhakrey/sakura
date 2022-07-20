@@ -1,17 +1,13 @@
-import discord
-from discord.errors import ExtensionAlreadyLoaded, Forbidden
-
 from discord.ext.commands import Bot
-from sakura.utils import prBlue, prBold, prCyan, prGreen, prPurple, prRed, prYellow
+from sakura.utils import prBlue, prGreen
 
 
-from sakura.config import COGS_FOLDER,DEFINED_COGS
-
-def event_setup(bot:Bot):
+def event_setup(bot: Bot):
     pass
+
     @bot.event
     async def on_ready():
-        prGreen(f"[Bot] - Logged in as {bot.user.name}")
+        prGreen("[Bot] - Logged in as {bot.user.name}")
         prGreen("[Bot] - Sakura Ready to Rock..")
         # for cogs in DEFINED_COGS:
         #     try:
@@ -21,7 +17,6 @@ def event_setup(bot:Bot):
         #         pass
         # prBold(f"[Bot] - All Extension Loaded")
 
-
     @bot.event
     async def on_disconnect():
-        prBlue(f"[Bot] - Disconnected! ")
+        prBlue("[Bot] - Disconnected! ")

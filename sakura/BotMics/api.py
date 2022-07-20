@@ -1,40 +1,46 @@
-from sakura.BotMics.bot_db import DbConnection
+
+import requests
 from main.settings import CLIENT_ID, CLIENT_SECRET, DISCORD_REDIRECT_URL
-import requests,json
+from sakura.BotMics.bot_db import DbConnection
+
 
 class Discord_API:
-    def __init__(self,client_id=None,client_secret=None,redirect_url=None,settings=True) -> None:
+
+    def __init__(self,
+                 client_id=None,
+                 client_secret=None,
+                 redirect_url=None,
+                 settings=True) -> None:
         if settings:
-            self.client_id  = CLIENT_ID
+            self.client_id = CLIENT_ID
             self.client_secret = CLIENT_SECRET
             self.redirect_url = DISCORD_REDIRECT_URL
 
-        else:   
-            self.client_id  = client_id
+        else:
+            self.client_id = client_id
             self.client_secret = client_secret
             self.redirect_url = redirect_url
 
     # check token in valid or expired
-    def check_token(self,token):
+    def check_token(self, token):
         url = "https://discord.com/api/v8/users/@me"
-        response = requests.get(url,headers={
-            'Authorization':"Bearer %s"% token
-        })
+        response = requests.get(url,
+                                headers={'Authorization': "Bearer %s" % token})
         return response.status_code
 
-    def exchange_code(self,code:str):
+    def exchange_code(self, code: str):
         data = {
-            "client_id":self.client_id,
-            "client_secret":self.client_secret,
-            "grant_type":"authorization_code",
-            "code":code,
-            "redirect_uri":self.redirect_url,
-            'scope':'identify guilds guilds.join'
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": self.redirect_url,
+            'scope': 'identify guilds guilds.join'
         }
-        headers = {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        response = requests.post('https://discord.com/api/oauth2/token',data=data,headers=headers)
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        response = requests.post('https://discord.com/api/oauth2/token',
+                                 data=data,
+                                 headers=headers)
 
         print(response)
         credentials = response.json()
@@ -42,9 +48,9 @@ class Discord_API:
 
         access_token = credentials['access_token']
 
-        response = requests.get("https://discord.com/api/v8/users/@me",headers={
-            'Authorization':"Bearer %s"% access_token
-        })
+        response = requests.get(
+            "https://discord.com/api/v8/users/@me",
+            headers={'Authorization': "Bearer %s" % access_token})
 
         print(response)
         user = response.json()
@@ -52,44 +58,41 @@ class Discord_API:
         print(user)
         return user
 
-    def get_guild_list(self,access_token):
-        response = requests.get("https://discord.com/api/v8/users/@me/guilds",headers={
-            'Authorization':"Bearer %s"% access_token
-        })
+    def get_guild_list(self, access_token):
+        response = requests.get(
+            "https://discord.com/api/v8/users/@me/guilds",
+            headers={'Authorization': "Bearer %s" % access_token})
         as_a_guild = []
         for details in response.json():
-            if details['owner'] == True:
+            if details['owner'] is True:
                 if DbConnection.get_sync_server(server_id=details['id']):
                     as_a_guild.append(details)
             # except TypeError:
             #     pass
         return as_a_guild
 
-    def get_guild_channel(self,access_token,id):
+    def get_guild_channel(self, access_token, id):
         # return None
-        url = "https://discord.com/api/v8/guilds/"+str(id)+'/channels'
+        url = "https://discord.com/api/v8/guilds/" + str(id) + '/channels'
         # print(url)
         # print(access_token)
-        response = requests.get(url,headers={
-            'Authorization':"Bot %s"% access_token
-        })
+        response = requests.get(
+            url, headers={'Authorization': "Bot %s" % access_token})
         # print(response.json())
         return response.json()
         # print(json.dumps(response.json(),indent=5))
 
-    def _take_second(self,elem):
+    def _take_second(self, elem):
         return elem['name']
 
-
-    def get_guild_roles(self,token,id):
-        url = "https://discord.com/api/v8/guilds/"+str(id)+'/roles'
+    def get_guild_roles(self, token, id):
+        url = "https://discord.com/api/v8/guilds/" + str(id) + '/roles'
         # print(url)
         # print(access_token)
-        response = requests.get(url,headers={
-            'Authorization':"Bot %s"% token
-        })
+        response = requests.get(url,
+                                headers={'Authorization': "Bot %s" % token})
         # print(response.json())
-        roles_list=[]
+        roles_list = []
         for roles in response.json():
             try:
                 if roles['tags']:
@@ -97,7 +100,7 @@ class Discord_API:
             except KeyError:
                 roles_list.append(roles)
         roles_list.pop(0)
-        roles_list.sort(key=self._take_second,reverse=True)
+        roles_list.sort(key=self._take_second, reverse=True)
         return roles_list
         # print(json.dumps(response.json(),indent=5))
         pass

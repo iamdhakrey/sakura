@@ -2,13 +2,17 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from dotenv import load_dotenv
-load_dotenv()
+from pathlib import Path
+from configparser import RawConfigParser
 
+config = RawConfigParser()
+BASE_DIR = Path(__file__).resolve().parent
+config.read(str(BASE_DIR)+'/settings.ini')
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.environ.get("RUN_STATUS"))
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', config.get('setup','RUN_STATUS'))
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.environ.get("RUN_STATUS"))
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
