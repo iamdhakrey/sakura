@@ -5,13 +5,13 @@
 
 As of now, it can support the following things:
 
-[x] Manage your server
-[x] Manage your server's roles
-[x] Manage your server's channels
-[x] Fun commands
-[x] Moderation commands
-[x] Welcome messages and role assignment
-[ ] Music commnads
+- [x] Manage your server
+- [x] Manage your server's roles
+- [x] Manage your server's channels
+- [x] Fun commands
+- [x] Moderation commands
+- [x] Welcome messages and role assignment
+- [ ] Music commnads
 
 ![Sakura](static/images/sakura.webp  "Sakura")
 
