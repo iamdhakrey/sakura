@@ -42,9 +42,7 @@ class Discord_API:
                                  data=data,
                                  headers=headers)
 
-        print(response)
         credentials = response.json()
-        print(credentials)
 
         access_token = credentials['access_token']
 
@@ -52,10 +50,8 @@ class Discord_API:
             "https://discord.com/api/v8/users/@me",
             headers={'Authorization': "Bearer %s" % access_token})
 
-        print(response)
         user = response.json()
         user['access_token'] = access_token
-        print(user)
         return user
 
     def get_guild_list(self, access_token):
@@ -67,31 +63,21 @@ class Discord_API:
             if details['owner'] is True:
                 if DbConnection.get_sync_server(server_id=details['id']):
                     as_a_guild.append(details)
-            # except TypeError:
-            #     pass
         return as_a_guild
 
     def get_guild_channel(self, access_token, id):
-        # return None
         url = "https://discord.com/api/v8/guilds/" + str(id) + '/channels'
-        # print(url)
-        # print(access_token)
         response = requests.get(
             url, headers={'Authorization': "Bot %s" % access_token})
-        # print(response.json())
         return response.json()
-        # print(json.dumps(response.json(),indent=5))
 
     def _take_second(self, elem):
         return elem['name']
 
     def get_guild_roles(self, token, id):
         url = "https://discord.com/api/v8/guilds/" + str(id) + '/roles'
-        # print(url)
-        # print(access_token)
         response = requests.get(url,
                                 headers={'Authorization': "Bot %s" % token})
-        # print(response.json())
         roles_list = []
         for roles in response.json():
             try:
@@ -102,5 +88,3 @@ class Discord_API:
         roles_list.pop(0)
         roles_list.sort(key=self._take_second, reverse=True)
         return roles_list
-        # print(json.dumps(response.json(),indent=5))
-        pass
