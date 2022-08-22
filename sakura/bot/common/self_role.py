@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import discord
 from discord.ext.commands.context import Context
-from sakura.BotMics.bot_db import DbConnection
-from sakura.BotMics.botutils import (eval_reaction_and_role, grep_emojis,
-                                     norm_to_emoji)
+from sakura.bot.BotMics.bot_db import DbConnection
+from sakura.bot.BotMics.botutils import (eval_reaction_and_role, grep_emojis,
+                                         norm_to_emoji)
 
 
 class SelfRole:

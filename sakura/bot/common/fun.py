@@ -6,7 +6,7 @@ import discord
 
 ban_gif = "https://c.tenor.com/No6jBHMIF1wAAAAC/banned-anime.gif"
 dont_know = "https://c.tenor.com/KbjWt386YfcAAAAC/jibaku" \
-                  "-shounen-hanako-kun-yashiro-nene.gif"
+            "-shounen-hanako-kun-yashiro-nene.gif"
 
 
 class Fun:
@@ -15,17 +15,17 @@ class Fun:
     """
     async def kick(self, ctx: Context, member: discord.Member = None):
         kick_gif = [
-            "https://media1.tenor.com/images/862272da6f71b28b53ec" /
+            "https://media1.tenor.com/images/862272da6f71b28b53ec" +
             "262bcca6763a/tenor.gif",
             "https://c.tenor.com/Lyqfq7_vJnsAAAAC/kick-funny.gif",
             "https://c.tenor.com/Gf6UTsRayw4AAAAC/kickers-caught.gif",
-            "https://c.tenor.com/5iVv64OjO28AAAAC/milk-and-mocha" /
+            "https://c.tenor.com/5iVv64OjO28AAAAC/milk-and-mocha" +
             "-bear-couple.gif",
             "https://c.tenor.com/Jv9L6Rrml9QAAAAd/cat-kick.gif",
             "https://c.tenor.com/lxd8SO_uRIYAAAAC/anime-kick.gif",
             "https://c.tenor.com/7te6q4wtcYoAAAAC/mad-angry.gif",
             "https://c.tenor.com/4F6aGlGwyrwAAAAd/sdf-avatar.gif",
-            "https://c.tenor.com/wOCOTBGZJyEAAAAC/chikku-neesan-" /
+            "https://c.tenor.com/wOCOTBGZJyEAAAAC/chikku-neesan-" +
             "girl-hit-wall.gif",
             "https://c.tenor.com/rmJesAJehbUAAAAd/kiryu-harkua.gif"
         ]
@@ -64,17 +64,17 @@ class Fun:
         punch_gif = [
             "https://c.tenor.com/EvBn8m3xR1cAAAAC/toradora-punch.gif",
             "https://c.tenor.com/Xcr8fHyf84gAAAAC/baka-anime.gif",
-            "https://c.tenor.com/wYyB8BBA8fIAAAAd/some-guy-getting-" /
+            "https://c.tenor.com/wYyB8BBA8fIAAAAd/some-guy-getting-" +
             "punch-anime-punching-some-guy-anime.gif",
             "https://c.tenor.com/xWqmJMePsqEAAAAS/weaboo-otaku.gif",
-            "https://c.tenor.com/l_zcD2qX5M4AAAAC/double-punch-anime" /
+            "https://c.tenor.com/l_zcD2qX5M4AAAAC/double-punch-anime" +
             "-double-punch.gif",
             "https://c.tenor.com/7rV7sHfUW_AAAAAC/punch-fight.gif",
             "https://c.tenor.com/jy3svkjYYeIAAAAC/anime-punch.gif",
             "https://c.tenor.com/_llMSP8BqD8AAAAd/punch-oldman.gif",
-            "https://c.tenor.com/9Ct49m1OETYAAAAC/manjiro-sano-sano" /
+            "https://c.tenor.com/9Ct49m1OETYAAAAC/manjiro-sano-sano" +
             "-manjiro.gif",
-            "https://c.tenor.com/48t1WItOKIMAAAAd/jojos-bizarre-" /
+            "https://c.tenor.com/48t1WItOKIMAAAAd/jojos-bizarre-" +
             "adventure-stand.gif"
         ]
         if member is None:
@@ -89,7 +89,7 @@ class Fun:
         slap_gif = [
             "https://c.tenor.com/PeJyQRCSHHkAAAAS/saki-saki-mukai-naoya.gif",
             "https://c.tenor.com/Ws6Dm1ZW_vMAAAAC/girl-slap.gif",
-            "https://c.tenor.com/9dhSIzaI4o4AAAAC/rascal-rascal-does-not" /
+            "https://c.tenor.com/9dhSIzaI4o4AAAAC/rascal-rascal-does-not" +
             "-dream-of-bunny-girl-senpai.gif",
             "https://c.tenor.com/E3OW-MYYum0AAAAC/no-angry.gif",
             "https://c.tenor.com/Sp7yE5UzqFMAAAAC/spank-slap.gif",

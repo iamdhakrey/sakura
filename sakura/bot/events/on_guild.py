@@ -3,8 +3,8 @@ from os import makedirs
 
 from discord.ext.commands import Bot
 from django.conf import settings
-from sakura.BotMics.bot_db import DbConnection
-from sakura.utils import prCyan, prPurple
+from sakura.bot.BotMics.bot_db import DbConnection
+from sakura.bot.utils import prCyan, prPurple
 
 
 def event_setup(bot: Bot):

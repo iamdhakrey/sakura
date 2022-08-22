@@ -1,10 +1,10 @@
 import discord
 from discord.ext.commands import Bot
 from django.conf import settings
-from sakura.BotMics.bot_db import DbConnection
-from sakura.BotMics.botutils import norm_to_emoji
-from sakura.BotMics.image import save_image
-from sakura.utils import prCyan, prPurple
+from sakura.bot.BotMics.bot_db import DbConnection
+from sakura.bot.BotMics.botutils import norm_to_emoji
+from sakura.bot.BotMics.image import save_image
+from sakura.bot.utils import prCyan, prPurple
 
 ROOT_PATH = str(settings.MEDIA_ROOT)
 

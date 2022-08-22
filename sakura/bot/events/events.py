@@ -1,5 +1,5 @@
 from discord.ext.commands import Bot
-from sakura.utils import prBlue, prGreen
+from sakura.bot.utils import prBlue, prGreen
 
 
 def event_setup(bot: Bot):

@@ -7,7 +7,7 @@ from discord.errors import ClientException
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.ext.commands.context import Context
-from sakura.utils import prYellow
+from sakura.bot.utils import prYellow
 
 
 class Music(commands.Cog):

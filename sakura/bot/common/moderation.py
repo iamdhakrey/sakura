@@ -2,7 +2,7 @@ import ast
 import discord
 from discord import channel
 from discord.ext.commands.context import Context
-from sakura.BotMics.bot_db import DbConnection
+from sakura.bot.BotMics.bot_db import DbConnection
 
 
 class Moderation:
@@ -159,7 +159,7 @@ class Moderation:
                                                          max_uses=1)
                 # send msg to user with invite link
                 await user.send(
-                    f"You have been unbanned from {ctx.guild.name} " /
+                    f"You have been unbanned from {ctx.guild.name} " +
                     f"now you can join again by click on this url: \n {invite}"
                 )
                 # unban user

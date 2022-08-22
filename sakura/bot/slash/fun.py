@@ -4,7 +4,7 @@ from discord.ext import commands
 from discord.ext.commands.context import Context
 
 from sakura.bot.common.fun import Fun as FunCommon
-from sakura.utils import prBold
+from sakura.bot.utils import prBold
 
 
 class SlashFun(commands.Cog):
@@ -21,7 +21,7 @@ class SlashFun(commands.Cog):
                    usage="y_kick @user")
     async def kick(self, ctx: Context, member: discord.Member):
         prBold(
-            f"[Bot] - Fun /Kick used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - Fun /Kick used by {ctx.author} on {ctx.author.guild} " +
             " Discord Server"
         )
         if member is None:
@@ -38,7 +38,7 @@ class SlashFun(commands.Cog):
     )
     async def hug(self, ctx: Context, member: discord.Member):
         prBold(
-            f"[Bot] - Fun /Hug used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - Fun /Hug used by {ctx.author} on {ctx.author.guild} " +
             " Discord Server"
         )
         if member is None:
@@ -55,7 +55,7 @@ class SlashFun(commands.Cog):
     )
     async def punch(self, ctx: Context, member: discord.Member):
         prBold(
-            f"[Bot] - Fun /Punch used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - Fun /Punch used by {ctx.author} on {ctx.author.guild} " +
             "Discord Server"
         )
         if member is None:
@@ -72,7 +72,7 @@ class SlashFun(commands.Cog):
     )
     async def slap(self, ctx: Context, member: discord.Member):
         prBold(
-            f"[Bot] - Fun /Slap used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - Fun /Slap used by {ctx.author} on {ctx.author.guild} " +
             "Discord Server"
         )
         if member is None:
@@ -89,7 +89,7 @@ class SlashFun(commands.Cog):
     )
     async def poke(self, ctx: Context, member: discord.Member):
         prBold(
-            f"[Bot] - Fun /Poke used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - Fun /Poke used by {ctx.author} on {ctx.author.guild} " +
             "Discord Server"
         )
         if member is None:
@@ -106,7 +106,7 @@ class SlashFun(commands.Cog):
     )
     async def howhot(self, ctx: Context, member: discord.Member):
         prBold(
-            f"[Bot] - Fun /HowHot used by {ctx.author} on {ctx.author.guild}" /
+            f"[Bot] - Fun /HowHot used by {ctx.author} on {ctx.author.guild}" +
             " Discord Server"
         )
         if member is None:
@@ -123,7 +123,7 @@ class SlashFun(commands.Cog):
     )
     async def kiss(self, ctx: Context, member: discord.Member):
         prBold(
-            f"[Bot] - Fun /Kiss used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - Fun /Kiss used by {ctx.author} on {ctx.author.guild} " +
             "Discord Server"
         )
         if member is None:

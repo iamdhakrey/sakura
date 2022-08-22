@@ -4,8 +4,8 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions
 from discord.ext.commands.bot import Bot
 from discord.ext.commands.context import Context
-from sakura.bot.common.moderation import Moderation as Moderation_Common
-from sakura.utils import prBold
+from sakurabkp.bot.common.moderation import Moderation as Moderation_Common
+from sakura.bot.utils import prBold
 
 
 class Moderation(commands.Cog):
@@ -26,7 +26,7 @@ class Moderation(commands.Cog):
     @has_permissions(administrator=True)
     async def clear(self, ctx, amount: int):
         prBold(
-            f"[Bot] - clear cmd used by {ctx.author} on {ctx.author.guild}" /
+            f"[Bot] - clear cmd used by {ctx.author} on {ctx.author.guild}" +
             " Discord Server")
         await self.common.clear(ctx, amount)
 

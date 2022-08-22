@@ -4,7 +4,7 @@ from discord.ext import commands
 from discord.ext.commands.context import Context
 
 from sakura.bot.common.basic import Basic as common_basic
-from sakura.utils import prBold
+from sakura.bot.utils import prBold
 
 
 class SlashBasic(commands.Cog):
@@ -20,7 +20,7 @@ class SlashBasic(commands.Cog):
     )
     async def hello(self, ctx):
         prBold(
-            f"[Bot] - /Hello used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - /Hello used by {ctx.author} on {ctx.author.guild} " +
             " Discord Server"
         )
         await ctx.respond(f"Hi, {ctx.author.name}!")
@@ -32,7 +32,7 @@ class SlashBasic(commands.Cog):
     )
     async def avatar(self, ctx: Context, *, user: discord.Member = None):
         prBold(
-            f"[Bot] - /Avatar used by {ctx.author} on {ctx.author.guild}" /
+            f"[Bot] - /Avatar used by {ctx.author} on {ctx.author.guild}" +
             " Discord Server"
         )
         user = user or ctx.author
@@ -45,7 +45,7 @@ class SlashBasic(commands.Cog):
     )
     async def ping(self, ctx: Context):
         prBold(
-            f"[Bot] - /Ping used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - /Ping used by {ctx.author} on {ctx.author.guild} " +
             "Discord Server"
         )
         await ctx.respond(embed=await self.common.ping(ctx))
@@ -58,7 +58,7 @@ class SlashBasic(commands.Cog):
     )
     async def say(self, ctx: Context, *, text: str):
         prBold(
-            f"[Bot] - /Say used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - /Say used by {ctx.author} on {ctx.author.guild} " +
             " Discord Server"
         )
         await ctx.trigger_typing()
@@ -72,7 +72,7 @@ class SlashBasic(commands.Cog):
     )
     async def info(self, ctx: Context, *, user: discord.Member = None):
         prBold(
-            f"[Bot] - /Info used by {ctx.author} on {ctx.author.guild} " /
+            f"[Bot] - /Info used by {ctx.author} on {ctx.author.guild} " +
             "Discord Server"
         )
         user = user if user else ctx.author

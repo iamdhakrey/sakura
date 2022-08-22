@@ -1,17 +1,16 @@
 # from __future__ import annotations
 import asyncio
+
 import discord
-from discord.ext.commands import slash_command
-from discord.ext import commands
-from discord.ext.commands.context import Context
-from discord.ui import Select
-
-from sakura.BotMics.botutils import unicode_emoji
-from sakura.bot.common.self_role import SelfRole
-from sakura.utils import prBold
-
 # from discord.ext.commands import Option
 from discord import Option
+from discord.ext import commands
+from discord.ext.commands import slash_command
+from discord.ext.commands.context import Context
+from discord.ui import Select
+from sakura.bot.BotMics.botutils import unicode_emoji
+from sakura.bot.utils import prBold
+from sakura.bot.common.self_role import SelfRole
 
 
 class SlashSelfRole(commands.Cog):

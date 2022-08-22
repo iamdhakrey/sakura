@@ -1,4 +1,4 @@
-from sakura.BotMics.botutils import norm_to_emoji
+from sakurabkp.BotMics.botutils import norm_to_emoji
 import time
 from discord import channel, colour, emoji, member, message
 from discord.ext import commands
@@ -6,7 +6,7 @@ import asyncio
 import discord
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from io import BytesIO
-from sakura.BotMics.bot_db import DbConnection
+from sakurabkp.BotMics.bot_db import DbConnection
 import requests,random,os, json
 from discord.ext.commands.context import Context
 

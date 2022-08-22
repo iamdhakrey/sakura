@@ -1,9 +1,9 @@
 from discord.ext.commands.context import Context
-from sakura.utils import prBold
+from sakura.bot.utils import prBold
 import discord
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
-from sakura.bot.common.basic import Basic as common_basic
+from sakurabkp.bot.common.basic import Basic as common_basic
 
 
 class Basic(commands.Cog):

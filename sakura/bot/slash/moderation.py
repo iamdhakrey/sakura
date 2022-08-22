@@ -5,7 +5,7 @@ from discord.ext.commands import has_permissions
 from discord.ext.commands.context import Context
 
 from sakura.bot.common.moderation import Moderation as ModerationCommon
-from sakura.utils import prBold
+from sakura.bot.utils import prBold
 
 
 class SlashModeration(commands.Cog):
@@ -19,7 +19,7 @@ class SlashModeration(commands.Cog):
                    description="Delete N number of messages")
     @has_permissions(administrator=True)
     async def delete(self, ctx: Context, number: int):
-        prBold(f"[Bot] - /delete used by {ctx.author} on {ctx.author.guild}" /
+        prBold(f"[Bot] - /delete used by {ctx.author} on {ctx.author.guild}" +
                " Discord Server")
         await self.common.clear(ctx, number)
         await ctx.respond(f"{number} messages deleted")

@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.errors import Forbidden
 
-from sakura.BotMics.bot_db import DbConnection
+from sakurabkp.BotMics.bot_db import DbConnection
 
 
 async def send_embed(ctx, embed):
@@ -18,13 +18,13 @@ async def send_embed(ctx, embed):
     except Forbidden:
         try:
             await ctx.send(
-                "Hey, seems like I can't send embeds. Please check" /
+                "Hey, seems like I can't send embeds. Please check" +
                 " my permissions :)")
         except Forbidden:
             await ctx.author.send(
-                "Hey, seems like I can't send any message in " /
+                "Hey, seems like I can't send any message in " +
                 f" {ctx.channel.name} on {ctx.guild.name}\n"
-                f"May you inform the server team about this " /
+                f"May you inform the server team about this " +
                 " issue? :slight_smile: ",
                 embed=embed)
 
@@ -60,8 +60,8 @@ class Help(commands.Cog):
             emb = discord.Embed(
                 title='Commands and modules',
                 color=self.color,
-                description=f'Use `{prefix}help <module>` to gain more' /
-                ' information about that module ' / ':smiley:\n')
+                description=f'Use `{prefix}help <module>` to gain more' +
+                ' information about that module ' + ':smiley:\n')
 
             for cog in self.bot.cogs:
                 emb.add_field(name=f"`{cog}`",
@@ -69,8 +69,8 @@ class Help(commands.Cog):
                               inline=True)
 
             emb.add_field(name="About",
-                          value="The Bots is developed by `Dhakrey#6689`, " /
-                          "based on discord.py.\n This version of it" /
+                          value="The Bots is developed by `Dhakrey#6689`, " +
+                          "based on discord.py.\n This version of it" +
                           f" is maintained by {owner}\n",
                           inline=False)
             emb.set_footer(text=f"Bot is running v{version}")
@@ -120,7 +120,7 @@ class Help(commands.Cog):
         elif len(input) > 1:
             emb = discord.Embed(
                 title="That's too much.",
-                description="Please request only one module at " /
+                description="Please request only one module at " +
                 " once :sweat_smile:",
                 color=discord.Color.orange())
         emb.set_author(name=f"Help - {self.bot.user.name}",

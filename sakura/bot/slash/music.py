@@ -2,10 +2,10 @@ import discord
 from discord.ext.commands import slash_command
 from discord.ext import commands
 from discord.ext.commands.context import Context
-from sakura.BotMics.botutils import JsonTask, Video
+from sakura.bot.BotMics.botutils import JsonTask, Video
 from discord import Option
 
-from sakura.utils import prBold
+from sakura.bot.utils import prBold
 
 
 # from sakura.BotMics.botutils import MusicQueue
@@ -174,7 +174,7 @@ class SlashMusic(commands.Cog):
         brief="Volume Control",
     )
     async def volume(self, ctx: Context, volume: int):
-        prBold(f"[Bot] - /Volume used by {ctx.author} on {ctx.author.guild}" /
+        prBold(f"[Bot] - /Volume used by {ctx.author} on {ctx.author.guild}" +
                "Discord Server")
         await ctx.trigger_typing()
         if volume < 0:
@@ -199,7 +199,7 @@ class SlashMusic(commands.Cog):
         description="stop",
     )
     async def stop(self, ctx: Context):
-        prBold(f"[Bot] - /Stop used by {ctx.author} on {ctx.author.guild}" /
+        prBold(f"[Bot] - /Stop used by {ctx.author} on {ctx.author.guild}" +
                " Discord Server")
         await ctx.trigger_typing()
         client = ctx.guild.voice_client
@@ -245,10 +245,8 @@ class SlashMusic(commands.Cog):
         brief="play music",
     )
     async def play(self, ctx: Context, *,
-                   url: Option(
-                       str, "The url of the song to play"
-                   )):
-        prBold(f"[Bot] - /play used by {ctx.author} on {ctx.author.guild} " /
+                   url: Option(str, "The url of the song to play")):
+        prBold(f"[Bot] - /play used by {ctx.author} on {ctx.author.guild} " +
                "Discord Server")
 
         self.guild = ctx.guild

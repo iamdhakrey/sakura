@@ -2,8 +2,8 @@
 import discord
 import django
 from discord.ext.commands import Bot
-from sakura.BotMics.bot_db import DbConnection
-from sakura.utils import prBold
+from sakura.bot.BotMics.bot_db import DbConnection
+from sakura.bot.utils import prBold
 
 
 def event_setup(bot: Bot):
