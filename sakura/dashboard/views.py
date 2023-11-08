@@ -46,7 +46,7 @@ def dashboard(request: Request):
                 servers.save()
                 # guild_list.append(temp_server)
     return render(
-        request, 'new_dashboard.html', {
+        request, 'dashboard/new_dashboard.html', {
             'username': request.user,
             'guild_list': guild_list,
             'invite_url': discord_invite

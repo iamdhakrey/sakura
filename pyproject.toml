@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "sakura"
+version = "1.0.0"
+description = "Yae Sakura A Discord Bot."
+authors = ["iamdhakrey <dhakreyhrithik@gmail.com>"]
+license = "GPL3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11"
+django = "^4.2.7"
+pillow = "^10.1.0"
+python-dotenv = "^1.0.0"
+requests = "^2.31.0"
+youtube-dl = "^2021.12.17"
+pytube = "^15.0.0"
+py-cord = "^2.4.1"
+whitenoise = "^6.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

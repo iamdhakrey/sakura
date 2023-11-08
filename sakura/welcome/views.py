@@ -138,7 +138,7 @@ def welcome(request: Request, pk):
                        welcome_channel=welcome_channel,
                        error=error,
                        success=success)
-        return render(request, 'welcome.html', context)
+        return render(request, 'welcome/welcome.html', context)
 
 
 @login_required()

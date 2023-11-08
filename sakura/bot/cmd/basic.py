@@ -3,7 +3,7 @@ from sakura.bot.utils import prBold
 import discord
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
-from sakurabkp.bot.common.basic import Basic as common_basic
+from sakura.bot.common.basic import Basic as common_basic
 
 
 class Basic(commands.Cog):

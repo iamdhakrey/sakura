@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands
 from discord.errors import Forbidden
-
-from sakurabkp.BotMics.bot_db import DbConnection
-
+from discord.ext.commands import Bot
+from sakura.bot.BotMics.bot_db import DbConnection
 
 async def send_embed(ctx, embed):
     """
@@ -34,7 +33,7 @@ class Help(commands.Cog):
     Sends this help message
     """
 
-    def __init__(self, bot: discord.ext.commands.Bot):
+    def __init__(self, bot: Bot):
         self.bot = bot
         self.color = 0xc9a0dc
 
@@ -49,7 +48,7 @@ class Help(commands.Cog):
         version = "0.0.1"
 
         owner = "Dhakrey"
-        # owner_name = "Dhakrey#6689"
+        # owner = "Dhakrey#6689"
 
         if not input:
             try:
@@ -64,13 +63,17 @@ class Help(commands.Cog):
                 ' information about that module ' + ':smiley:\n')
 
             for cog in self.bot.cogs:
-                emb.add_field(name=f"`{cog}`",
+                print(cog.startswith('Slash'))
+                if cog.startswith('Slash'):
+                    pass
+                else:
+                    emb.add_field(name=f"`{cog}`",
                               value=self.bot.cogs[cog].__doc__,
                               inline=True)
 
             emb.add_field(name="About",
                           value="The Bots is developed by `Dhakrey#6689`, " +
-                          "based on discord.py.\n This version of it" +
+                          "based on py-cord.\n This version of it" +
                           f" is maintained by {owner}\n",
                           inline=False)
             emb.set_footer(text=f"Bot is running v{version}")
@@ -78,6 +81,7 @@ class Help(commands.Cog):
         elif len(input) == 1:
 
             for cog in self.bot.cogs:
+                print("{}".format(cog))
                 if cog.lower() == input[0].lower():
 
                     emb = discord.Embed(title=f'{cog} - Commands',
@@ -126,7 +130,20 @@ class Help(commands.Cog):
         emb.set_author(name=f"Help - {self.bot.user.name}",
                        icon_url=self.bot.user.avatar)
 
-        await send_embed(ctx, emb)
+        embed = discord.Embed(title="Bot Help", color=0x00ff00)
+
+        embed.set_footer(text=f"Bot version {version}")
+        for cog_name, cog in self.bot.cogs.items():
+            cog_help_str = ""
+            for cmd in cog.get_commands():
+                if isinstance(cmd, commands.Command):
+                    cog_help_str += f"\n{cmd.name}: {cmd.help}"
+                if cog_help_str:
+                    embed.add_field(name=cog_name, value=cog_help_str, inline=False)
+        embed.set_author(name=owner)
+        await ctx.send(embed=embed)
+
+        # await send_embed(ctx, emb)
 
     @commands.command(
         hidden=True, )

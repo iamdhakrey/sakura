@@ -7,9 +7,9 @@ from discord.ext.commands import has_permissions
 from discord.ext.commands.bot import Bot
 from discord.ext.commands.context import Context
 from PIL import Image, ImageOps, UnidentifiedImageError
-from sakurabkp.BotMics.bot_db import DbConnection
-from sakurabkp.BotMics.botutils import norm_to_emoji
-from sakurabkp.BotMics.image import save_image
+from sakura.bot.BotMics.bot_db import DbConnection
+from sakura.bot.BotMics.botutils import norm_to_emoji
+from sakura.bot.BotMics.image import save_image
 
 
 class Welcome(commands.Cog):

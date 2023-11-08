@@ -59,11 +59,11 @@ class Discord_API:
         response = requests.get(
             "https://discord.com/api/v8/users/@me/guilds",
             headers={'Authorization': "Bearer %s" % access_token})
-        _guilds = dict()
         _return = []
         # print(response.json())
         for details in response.json():
-            print(details, "details \n \n")
+            # print(details, "details \n \n")
+            _guilds = dict()
             if details.get("owner"):
                 _guilds["name"]  =  details.get("name")
                 _guilds["id"] = details.get("id")
@@ -74,7 +74,6 @@ class Discord_API:
                 else:
                     _guilds["is_added"] = False
                 _return.append(_guilds)
-                _guilds = dict()
         return _return 
 
     def get_guild_channel(self, access_token, id):

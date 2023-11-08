@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.ext.commands.context import Context
-from sakurabkp.bot.common.fun import Fun as FunCommon
+from sakura.bot.common.fun import Fun as FunCommon
 
 ban_gif = "https://c.tenor.com/No6jBHMIF1wAAAAC/banned-anime.gif"
 dont_know = "https://c.tenor.com/KbjWt386YfcAAAAC/jibaku-" \
