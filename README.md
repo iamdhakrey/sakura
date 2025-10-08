@@ -3,6 +3,7 @@
 
 **Sakura** is a web based discord bot. It is a simple bot that can be used to manage your server. It is currently in development and is not yet fully functional. It is not yet a fully featured bot.
 
+
 As of now, it can support the following things:
 
 - [x] Manage your server
